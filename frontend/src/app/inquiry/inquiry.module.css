@@ -1,0 +1,90 @@
+.inquiryContainer {
+    max-width: 800px;
+    margin: auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    text-align: center;
+    overflow-y: auto;
+
+  }
+  
+  .inquiryTitle {
+    font-size: 2.5rem;
+    color: white;
+  }
+  
+  .inquirySubtitle {
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  .inquiryForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .formGroup label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: white;
+  }
+  
+  
+  .formGroup input,
+  .formGroup select,
+  .formGroup textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: rgb(80, 73, 73);
+  }
+  .back-button {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 8px 16px;
+    background-color: #f3f4f6; /* Light gray */
+    color: #333; /* Dark gray text */
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .back-button:hover {
+    background-color: #d1d5db; /* Darker gray on hover */
+  }
+  
+  .back-button:focus {
+    outline: 2px solid #007bff; /* Adds focus outline for accessibility */
+  }
+  
+  .submitButton {
+    padding: 12px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border: none;
+    background: #ff6b6b;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .submitButton:hover {
+    background: #ff4b4b;
+  }
+  
