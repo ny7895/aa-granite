@@ -8,22 +8,82 @@ import LocomotiveScroll from "locomotive-scroll";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+type ExtendedLocomotiveScroll = {
+  scrollTo: (
+    target: Element | string | number,
+    options?: { duration?: number; disableLerp?: boolean }
+  ) => void;
+  on: (event: string, callback: () => void) => void;
+  off: (event: string, callback: () => void) => void;
+  update: () => void;
+  destroy: () => void;
+  scroll?: {
+    instance?: {
+      scroll?: {
+        y: number;
+      };
+    };
+  };
+};
+
 export default function Home() {
   useEffect(() => {
-    if (typeof document !== "undefined") {
+    if (typeof window !== "undefined") {
       gsap.registerPlugin(ScrollTrigger);
 
-      const mainElement = document.querySelector("#main") as HTMLElement | null;
-      if (!mainElement) return; // Exit if `#main` is not found
+      import("locomotive-scroll").then((LocomotiveScrollModule) => {
+        const scrollEl = document.querySelector("#main") as HTMLElement;
+        if (!scrollEl) return;
 
-      const scroll = new LocomotiveScroll({
-        el: mainElement,
-        smooth: true,
+        const scroll = new LocomotiveScrollModule.default({
+          el: scrollEl,
+          smooth: true,
+        }) as unknown as ExtendedLocomotiveScroll;
+
+        // Scroll event handler
+        const handleScroll = () => ScrollTrigger.update();
+        scroll.on("scroll", handleScroll);
+
+        // Scroller proxy configuration
+        ScrollTrigger.scrollerProxy("#main", {
+          scrollTop(value) {
+            if (typeof value === "number") {
+              scroll.scrollTo(value, { duration: 0, disableLerp: true });
+              return;
+            }
+            return scroll.scroll?.instance?.scroll?.y || 0;
+          },
+          getBoundingClientRect() {
+            return {
+              top: 0,
+              left: 0,
+              width: window.innerWidth,
+              height: window.innerHeight,
+            };
+          },
+          pinType: scrollEl.style.transform ? "transform" : "fixed",
+        });
+
+        // Resize handler
+        const handleResize = () => ScrollTrigger.refresh();
+        window.addEventListener("resize", handleResize);
+
+        // Refresh handler
+        const handleRefresh = () => scroll.update();
+        ScrollTrigger.addEventListener("refresh", handleRefresh);
+        ScrollTrigger.refresh();
+
+        // Cleanup function
+        return () => {
+          ScrollTrigger.removeEventListener("refresh", handleRefresh);
+          if (scroll.off) {
+            scroll.off("scroll", handleScroll);
+          }
+          window.removeEventListener("resize", handleResize);
+          ScrollTrigger.clearMatchMedia();
+          scroll.destroy();
+        };
       });
-
-      return () => {
-        scroll.destroy();
-      };
     }
   }, []);
 

@@ -1,3 +1,5 @@
+/* Locomotive Scroll styles (ensure this is included in your styles) */
+@import "locomotive-scroll/dist/locomotive-scroll.css";
 
 * {
     margin: 0;
@@ -30,6 +32,9 @@ html, body {
     height: 800vh;
     overflow: hidden;
 }
+#main[data-scroll-container] {
+    position: relative;
+  }
 #page1{
     position: relative;
     height: 100vh;
