@@ -2,6 +2,13 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
+import styles from "../styles/LoginPage.module.css"; // Import the CSS module
+
+// Define expected structure of the decoded token
+interface DecodedToken {
+  exp: number;
+  role?: string; // Optional if it might not exist in all tokens
+}
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,13 +18,13 @@ export default function LoginPage() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
   useEffect(() => {
-    if (typeof window === "undefined") return; // ✅ Prevents SSR issues
+    if (typeof window === "undefined") return; // Prevents SSR issues
 
     const token = localStorage.getItem("token");
 
     if (token) {
       try {
-        const decoded = jwtDecode(token);
+        const decoded: DecodedToken = jwtDecode(token); // Use the interface
         console.log("✅ Token found:", decoded);
 
         const currentTime = Math.floor(Date.now() / 1000);
@@ -60,16 +67,16 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.heading}>🔑 Admin Login</h1>
-      <form onSubmit={handleLogin} style={styles.form}>
+    <div className={styles.container}>
+      <h1 className={styles.heading}>🔑 Admin Login</h1>
+      <form onSubmit={handleLogin} className={styles.form}>
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          style={styles.input}
+          className={styles.input}
         />
         <input
           type="password"
@@ -77,52 +84,13 @@ export default function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          style={styles.input}
+          className={styles.input}
         />
-        <button type="submit" style={styles.button}>
+        <button type="submit" className={styles.button}>
           Login
         </button>
       </form>
-      {error && <p style={styles.error}>{error}</p>}
+      {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 }
-
-const styles = {
-  container: {
-    padding: "40px",
-    textAlign: "center",
-    fontFamily: "Arial, sans-serif",
-  },
-  heading: {
-    fontSize: "24px",
-    marginBottom: "20px",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "15px", // ✅ Adds space between inputs
-  },
-  input: {
-    width: "300px",
-    padding: "10px",
-    fontSize: "16px",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
-  },
-  button: {
-    padding: "10px 20px",
-    fontSize: "16px",
-    backgroundColor: "#007BFF",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-  error: {
-    color: "red",
-    fontSize: "16px",
-    marginTop: "10px",
-  },
-};
