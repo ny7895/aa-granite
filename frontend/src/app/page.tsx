@@ -95,13 +95,13 @@ export default function Home() {
           <h1 id="site-title">Double A Granite</h1>{" "}
           {/* Replaces the logo image */}
         </div>
-        <img id="ig1" src="slabs-stacked.png" alt="" />
-        <img id="ig2" src="slabs-luxury-stacked.png" alt="" />
-        <img id="ig3" src="slabs-black-white.png" alt="" />
-        <img id="ig4" src="dramatic-slabs.png" alt="" />
-        <img id="ig5" src="black-slabs.png" alt="" />
-        <img id="ig6" src="marble-slabs.png" alt="" />
-        <img id="ig7" src="black-and-white-slabs.png" alt="" />
+        <img id="ig1" src="/public/slabs-stacked.png" alt="" />
+        <img id="ig2" src="/public/slabs-luxury-stacked.png" alt="" />
+        <img id="ig3" src="/public/slabs-black-white.png" alt="" />
+        <img id="ig4" src="/public/dramatic-slabs.png" alt="" />
+        <img id="ig5" src="/public/black-slabs.png" alt="" />
+        <img id="ig6" src="/public/marble-slabs.png" alt="" />
+        <img id="ig7" src="/public/black-and-white-slabs.png" alt="" />
         <h4>Turning slabs into statements</h4>
       </div>
 
@@ -119,7 +119,7 @@ export default function Home() {
         <h1 id="quality" className="quality">
           quality
         </h1>
-        <img id="ig10" src="industrial-slabs.png" alt="" />
+        <img id="ig10" src="/public/industrial-slabs.png" alt="" />
         <div id="line"></div>
       </div>
 
@@ -220,7 +220,7 @@ export default function Home() {
         <img
           data-scroll
           data-scroll-speed="-2"
-          src="dramatic-slab.png"
+          src="/public/dramatic-slab.png"
           alt=""
         />
       </div>
