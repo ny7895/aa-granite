@@ -3,17 +3,17 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import "./style.css";
-
+import dynamic from "next/dynamic";
 // Import Locomotive Scroll & GSAP
 import LocomotiveScroll from "locomotive-scroll";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-export default function Home() {
-  useEffect(() => {
+
+useEffect(() => {
+  if (typeof document !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Ensure element exists before initializing Locomotive Scroll
     const mainElement = document.querySelector("#main") as HTMLElement | null;
     if (!mainElement) return; // Exit if `#main` is not found
 
@@ -25,7 +25,9 @@ export default function Home() {
     return () => {
       scroll.destroy();
     };
-  }, []);
+  }
+}, []);
+
 
   return (
     <div id="main" data-scroll-container>
