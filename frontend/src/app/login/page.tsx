@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
-import styles from "../styles/LoginPage.module.css"; // Import the CSS module
+import styles from "../login/LoginPage.module.css"; // Import the CSS module
 
 // Define expected structure of the decoded token
 interface DecodedToken {
