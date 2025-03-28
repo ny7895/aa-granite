@@ -765,7 +765,7 @@
         width: 35%;
         height: 22vh;
         top: 40%;
-        left: 5%;
+        right: 5%;
     }
 
     #ig4-container {
@@ -1010,8 +1010,8 @@
 
     #ig10-container {
         display: relative; /* Ensure it's not hidden */
-        max-width: 75vw; /* Adjust width for responsiveness */
-        height: 25vh; /* Maintain aspect ratio */
+        max-width: 100vw; /* Adjust width for responsiveness */
+        height: 50vh; /* Maintain aspect ratio */
       }
 
     /* Ensure GSAP elements are visible */
