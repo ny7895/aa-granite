@@ -758,7 +758,7 @@
         width: 30%;
         height: 18vh;
         top: 20%;
-        left: 8%;
+        right: 30%;
     }
 
     #ig3-container {
@@ -1010,7 +1010,7 @@
 
     #ig10-container {
         display: relative; /* Ensure it's not hidden */
-        width: 65vw;
+        width: 80vw;
         height: 35vh; /* Maintain aspect ratio */
       }
 
