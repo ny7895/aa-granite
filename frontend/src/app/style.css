@@ -755,12 +755,14 @@
     }
 
     #ig2-container {
+        position: absolute;
+        grid-area: unset; /* Remove grid positioning if conflicting */
         width: 30%;
         height: 18vh;
-        position: absolute;
         top: 20%;
-        right: -50%;
-    }
+        right: 5%;
+        left: auto;
+      }
 
     #ig3-container {
         width: 35%;
@@ -1010,10 +1012,15 @@
     }
 
     #ig10-container {
-        display: relative; /* Ensure it's not hidden */
-        width: 65%;
-        padding-left: 20%;
-        height: 35vh; /* Maintain aspect ratio */
+        position: relative; /* Change from absolute to relative for better flow */
+        width: 80%; /* Slightly wider for better centering */
+        height: 35vh; /* Adjusted height */
+        margin: 0 auto; /* Auto margins center horizontally */
+        padding: 0; /* Remove left padding */
+        left: 0; /* Reset any absolute positioning */
+        right: 0; /* Reset any absolute positioning */
+        display: block !important; /* Force display */
+        transform: none; /* Remove any transforms */
       }
 
     /* Ensure GSAP elements are visible */
