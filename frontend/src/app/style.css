@@ -706,93 +706,100 @@
 
     /* Page 1 adjustments - Hero Section */
     #page1 {
-        height: auto;
         min-height: 100vh;
         padding: 20px;
+        position: relative;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        position: relative;
-        overflow: hidden;
+        justify-content: center; /* Center content vertically */
     }
-
-    /* Convert to grid layout only on mobile */
-    #page1 {
+    #page1::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         display: grid;
         grid-template-columns: repeat(6, 1fr);
-        grid-template-rows: auto repeat(8, 5vw); /* First row for content */
+        grid-template-rows: repeat(8, 5vw);
         gap: 8px;
-        align-items: start;
-    }
-
-    #heading {
-        grid-column: 1 / -1;
-        grid-row: 1;
-        z-index: 10;
-        text-align: center;
         padding: 20px;
-        background: rgba(21, 21, 25, 0.7);
-        border-radius: 8px;
-        margin: 0 auto;
-        width: 90%;
+        z-index: 1; /* Behind content */
+    }
+    #heading {
+        position: relative;
+        z-index: 10; /* Above images */
+        text-align: center;
+        margin-bottom: 30px;
     }
 
     /* Image container base styles */
     .image-container {
-        position: relative;
+        position: absolute;
         overflow: hidden;
         border-radius: 4px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        opacity: 0.85;
+        opacity: 0.8;
         transition: opacity 0.3s ease;
         background-size: cover;
         background-position: center;
-        margin: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
 
     /* Individual image positioning in grid */
     #ig1-container {
-        grid-column: 1 / span 2;
-        grid-row: 2 / span 3;
+        width: 33%;
+        height: 20vh;
+        top: 15%;
+        left: 5%;
     }
 
     #ig2-container {
-        grid-column: 3 / span 2;
-        grid-row: 3 / span 3;
+        width: 30%;
+        height: 18vh;
+        top: 20%;
+        right: 8%;
     }
 
     #ig3-container {
-        grid-column: 5 / span 2;
-        grid-row: 2 / span 4;
+        width: 35%;
+        height: 22vh;
+        top: 40%;
+        left: 10%;
     }
 
     #ig4-container {
-        grid-column: 1 / span 3;
-        grid-row: 5 / span 3;
+        width: 28%;
+        height: 19vh;
+        top: 45%;
+        right: 5%;
     }
 
     #ig5-container {
-        grid-column: 4 / span 3;
-        grid-row: 6 / span 3;
+        width: 32%;
+        height: 17vh;
+        bottom: 15%;
+        left: 8%;
     }
 
     #ig6-container {
-        grid-column: 2 / span 4;
-        grid-row: 8 / span 2;
+        width: 30%;
+        height: 20vh;
+        bottom: 10%;
+        right: 10%;
     }
 
     #ig7-container {
-        display: none; /* Hide this one in mobile grid */
+        display: none;
     }
 
     /* Title styling */
     #site-title {
         font-size: 2.5rem;
         color: #fff;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        margin-bottom: 0;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        margin: 0 auto;
+        max-width: 90%;
     }
 
     /* Page 2 adjustments */
@@ -844,6 +851,16 @@
     #page2 h2 {
         font-size: 2rem;
         text-align: center;
+    }
+    #page1::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(21, 21, 25, 0.4);
+        z-index: 2; /* Between images and text */
     }
 
     #down h4:first-of-type {
