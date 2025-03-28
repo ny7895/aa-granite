@@ -994,12 +994,25 @@
 
     /* CTA button adjustments */
     .cta-button {
-        font-size: 1.2rem;
-        margin-top: -20px;
-        margin-bottom: 0;
+        font-size: 1rem; /* Reduced from 1.2rem */
+        padding: 0.8rem 1.6rem; /* Reduced from 1rem 2rem */
+        margin: -10px auto 20px; /* Tighter top margin, centered, with space below */
         display: block;
         width: fit-content;
+        border-radius: 50px;
+        /* Ensure these match your existing button styles */
+        background-color: rgb(6, 69, 73);
+        color: rgb(207, 248, 255);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: rgba(0,0,0,0.6) 4px 4px 4px;
     }
+
+    #ig10-container {
+        display: block !important; /* Ensure it's not hidden */
+        max-width: 100%; /* Adjust width for responsiveness */
+        height: auto; /* Maintain aspect ratio */
+      }
 
     /* Ensure GSAP elements are visible */
     .section-heading,
@@ -1023,6 +1036,11 @@
 
     #page2 h1 {
         font-size: 2.5rem;
+    }
+    .cta-button {
+        font-size: 0.9rem; /* Even smaller for very small screens */
+        padding: 0.7rem 1.4rem; /* Slightly more compact */
+        margin-top: -5px; /* Less negative margin for very small screens */
     }
 
     .floating-text {
