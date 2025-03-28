@@ -753,6 +753,11 @@
     #ig3-container {
         background-image: url('https://aa-granite.s3.us-east-1.amazonaws.com/slabs-black-white.png');
     }
+    #ig10-container {
+        display: block !important; /* Ensure it's not hidden */
+        max-width: 100%; /* Adjust width for responsiveness */
+        height: auto; /* Maintain aspect ratio */
+      }
 
     /* Page 2 adjustments */
     #page2 {
@@ -792,9 +797,10 @@
     #down {
         position: relative !important;
         top: auto !important;
+        height: 50px;
         flex-direction: column;
         align-items: center !important;
-        padding: 20px !important;
+        padding: 10px 0 !important;
     }
 
     #down h4 {
@@ -803,7 +809,7 @@
     }
 
     /* Hide line2 on mobile */
-    #line2 {
+    #down #line2 {
         display: none;
     }
 
@@ -844,12 +850,11 @@
     #page6 {
         height: auto;
         padding: 50px 20px;
-        min-height: 100vh;
     }
 
     #elem3 {
         flex-direction: column;
-        margin-top: 50px;
+        margin-bottom: 10px;
     }
 
     #elem3 h4 {
