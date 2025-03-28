@@ -115,13 +115,16 @@ export default function InquiryForm() {
     setMessage("Submitting...");
 
     try {
-      const response = await fetch("http://localhost:5000/api/inquiry", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/inquiry`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         setMessage("Inquiry submitted successfully!");

@@ -32,7 +32,7 @@ interface Inquiry {
   depositMade: boolean;
   estimatedCompletionDate?: string;
 }
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"; // ✅ Ensure correct API URL
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const AdminDashboard = () => {
   const router = useRouter();
