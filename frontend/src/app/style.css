@@ -1015,7 +1015,6 @@
         position: relative; /* Change from absolute to relative for better flow */
         width: 80%; /* Slightly wider for better centering */
         height: 35vh; /* Adjusted height */
-        padding: 0; /* Remove left padding */
         left: 0; /* Reset any absolute positioning */
         right: 0; /* Reset any absolute positioning */
       }
