@@ -1017,7 +1017,7 @@
         height: 35vh; /* Adjusted height */
         left: 0; /* Reset any absolute positioning */
         right: 0; /* Reset any absolute positioning */
-        transform: translateX(20%); /* Pulls back by half the width */
+        transform: translateX(15%); /* Pulls back by half the width */
       }
 
     /* Ensure GSAP elements are visible */
