@@ -16,52 +16,91 @@ export default function Home() {
         scroller: window,
       });
 
-      // Page8 animations
-      gsap.utils.toArray<HTMLElement>(".staggered-row").forEach((row, i) => {
-        const heading = row.querySelector(".section-heading") as HTMLElement;
-        const description = row.querySelector(
-          ".section-description"
-        ) as HTMLElement;
-        const image = row.querySelector(".image-contain") as HTMLElement;
+      // Mobile detection and setup
+      const isMobile = window.innerWidth <= 768;
 
-        // Set initial visible state
-        gsap.set([heading, description], { opacity: 1, y: 0 });
+      if (isMobile) {
+        // Mobile-specific animation setup
+        gsap.utils.toArray<HTMLElement>(".staggered-row").forEach((row, i) => {
+          const heading = row.querySelector(".section-heading") as HTMLElement;
+          const description = row.querySelector(
+            ".section-description"
+          ) as HTMLElement;
+          const image = row.querySelector(".image-contain") as HTMLElement;
 
-        // Create timeline for each row
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: row,
-            start: "top 80%",
-            end: "bottom 20%",
-            scrub: 1,
-          },
+          // Set initial state for mobile
+          gsap.set([heading, description, image], {
+            opacity: 1,
+            y: 0,
+            x: 0,
+          });
+
+          // Create simpler mobile animations
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: row,
+              start: "top 85%",
+              end: "bottom 15%",
+              toggleActions: "play none none none",
+            },
+          });
+
+          tl.from([heading, description, image], {
+            opacity: 0,
+            y: 50,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power2.out",
+          });
         });
+      } else {
+        // Desktop animations (your original code)
+        gsap.utils.toArray<HTMLElement>(".staggered-row").forEach((row, i) => {
+          const heading = row.querySelector(".section-heading") as HTMLElement;
+          const description = row.querySelector(
+            ".section-description"
+          ) as HTMLElement;
+          const image = row.querySelector(".image-contain") as HTMLElement;
 
-        // Animation sequence
-        tl.from(heading, {
-          y: 100,
-          opacity: 0,
-          duration: 0.8,
-        })
-          .from(
-            description,
-            {
-              y: 80,
-              opacity: 0,
-              duration: 0.6,
+          // Set initial visible state
+          gsap.set([heading, description], { opacity: 1, y: 0 });
+
+          // Create timeline for each row
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: row,
+              start: "top 80%",
+              end: "bottom 20%",
+              scrub: 1,
             },
-            "-=0.4"
-          )
-          .from(
-            image,
-            {
-              x: i % 2 === 0 ? 200 : -200,
-              opacity: 0,
-              duration: 1,
-            },
-            "-=0.6"
-          );
-      });
+          });
+
+          // Animation sequence
+          tl.from(heading, {
+            y: 100,
+            opacity: 0,
+            duration: 0.8,
+          })
+            .from(
+              description,
+              {
+                y: 80,
+                opacity: 0,
+                duration: 0.6,
+              },
+              "-=0.4"
+            )
+            .from(
+              image,
+              {
+                x: i % 2 === 0 ? 200 : -200,
+                opacity: 0,
+                duration: 1,
+              },
+              "-=0.6"
+            );
+        });
+      }
 
       // Cleanup function
       return () => {
