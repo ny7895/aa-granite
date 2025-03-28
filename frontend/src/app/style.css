@@ -1012,7 +1012,7 @@
     }
 
     #ig10-container {
-        position: relative; /* Change from absolute to relative for better flow */
+        display: relative; /* Change from absolute to relative for better flow */
         width: 80%; /* Slightly wider for better centering */
         height: 35vh; /* Adjusted height */
         left: 0; /* Reset any absolute positioning */
