@@ -73,6 +73,51 @@ export default function Home() {
         ScrollTrigger.addEventListener("refresh", handleRefresh);
         ScrollTrigger.refresh();
 
+        // Page8 animations
+        gsap.utils.toArray(".staggered-row").forEach((row: any, i) => {
+          const heading = row.querySelector(".section-heading");
+          const description = row.querySelector(".section-description");
+          const image = row.querySelector(".image-contain");
+
+          // Set initial visible state
+          gsap.set([heading, description], { opacity: 1, y: 0 });
+
+          // Create timeline for each row
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: row,
+              start: "top 80%",
+              end: "bottom 20%",
+              scrub: 1,
+              scroller: "#main",
+            },
+          });
+
+          // Animation sequence
+          tl.from(heading, {
+            y: 100,
+            opacity: 0,
+            duration: 0.8,
+          })
+            .from(
+              description,
+              {
+                y: 80,
+                opacity: 0,
+                duration: 0.6,
+              },
+              "-=0.4"
+            )
+            .from(
+              image,
+              {
+                x: i % 2 === 0 ? 200 : -200,
+                opacity: 0,
+                duration: 1,
+              },
+              "-=0.6"
+            );
+        });
         // Cleanup function
         return () => {
           ScrollTrigger.removeEventListener("refresh", handleRefresh);
@@ -95,32 +140,46 @@ export default function Home() {
           <h1 id="site-title">Double A Granite</h1>{" "}
           {/* Replaces the logo image */}
         </div>
-        <img id="ig1" src="/frontend/public/slabs-stacked.png" alt="" />
-        <img id="ig2" src="/frontend/public/slabs-luxury-stacked.png" alt="" />
-        <img id="ig3" src="/frontend/public/slabs-black-white.png" alt="" />
-        <img id="ig4" src="/frontend/public/dramatic-slabs.png" alt="" />
-        <img id="ig5" src="/frontend/public/black-slabs.png" alt="" />
-        <img id="ig6" src="/frontend/public/arble-slabs.png" alt="" />
-        <img id="ig7" src="/frontend/public/black-and-white-slabs.png" alt="" />
-        <h4>Turning slabs into statements</h4>
+        {/* Image Containers */}
+        <div className="image-container" id="ig1-container"></div>
+        <div className="image-container" id="ig2-container"></div>
+        <div className="image-container" id="ig3-container"></div>
+        <div className="image-container" id="ig4-container"></div>
+        <div className="image-container" id="ig5-container"></div>
+        <div className="image-container" id="ig6-container"></div>
+        <div className="image-container" id="ig7-container"></div>
       </div>
 
       {/* Page 2 */}
       <div id="page2">
         <div id="down">
           <h4>© 2024</h4>
-          <h4>Our address</h4>
           <div id="line1"></div>
           <div id="line2"></div>
+          <h4>Turning slabs into statements</h4>
         </div>
-        <h2>
-          20+ years of expertise. <br /> We guarantee
-        </h2>
-        <h1 id="quality" className="quality">
-          quality
-        </h1>
-        <img id="ig10" src="/public/industrial-slabs.png" alt="" />
-        <div id="line"></div>
+
+        <div className="floating-text-container">
+          <h2 className="floating-text" data-scroll data-scroll-speed="0.3">
+            20+ years of expertise. <br /> We guarantee
+          </h2>
+          <h1
+            id="quality"
+            className="quality floating-text"
+            data-scroll
+            data-scroll-speed="0.5"
+          >
+            quality
+          </h1>
+        </div>
+
+        <div
+          className="image-container"
+          id="ig10-container"
+          data-scroll
+          data-scroll-speed="-0.2"
+        ></div>
+        <div id="line" data-scroll></div>
       </div>
 
       {/* Page 3 */}
@@ -184,16 +243,12 @@ export default function Home() {
 
       {/* Services Page */}
       <div id="page6">
-        <div id="elem1">
-          <h4>All apartments</h4>
-          <h4>All premises</h4>
-          <div id="line6"></div>
-          <div id="line6-vt"></div>
-        </div>
         <div id="elem2">
-          <Link href="/inquiry">
-            <button id="cta-button">Send Request</button>
-          </Link>
+          <div className="cta-wrapper">
+            <Link href="/inquiry" className="cta-button">
+              Request Consultation
+            </Link>
+          </div>
           <div id="line6-h"></div>
         </div>
         <div id="elem3">
@@ -202,27 +257,56 @@ export default function Home() {
           <div id="linee"></div>
         </div>
       </div>
+      <div id="page8">
+        {/* First Row */}
+        <div className="staggered-row">
+          <div className="text-content">
+            <h2 className="section-heading">Premium Granite Selection</h2>
+            <p className="section-description">
+              Elevate your space with the timeless beauty and durability of
+              premium granite countertops. At Double A Granite, we source only
+              the finest slabs, offering a variety of colors, patterns, and
+              finishes to match any style. Whether you want a bold statement
+              piece or a classic, elegant touch, our expertly crafted granite
+              countertops are built to last. Scratch-resistant, heat-resistant,
+              and low-maintenance, they’re perfect for kitchens, bathrooms, and
+              beyond. Upgrade your home with the luxury of granite today!
+            </p>
+          </div>
+          <div className="image-contain" id="ig11-container">
+            <div className="hover-image"></div>
+          </div>
+        </div>
 
+        {/* Second Row */}
+        <div className="staggered-row reversed">
+          <div className="image-contain" id="ig12-container">
+            <div className="hover-image"></div>
+          </div>
+          <div className="text-content">
+            <h2 className="section-heading">Expert Craftsmanship</h2>
+            <p className="section-description">
+              At Double A Granite, precision meets perfection. Our skilled
+              fabricators use state-of-the-art technology and hand-finished
+              detailing to create countertops that are both stunning and built
+              to last. Every cut, polish, and installation is done with care and
+              expertise, ensuring a flawless fit and finish. When you choose us,
+              you’re choosing quality, durability, and unmatched craftsmanship
+              that transforms your space.
+            </p>
+          </div>
+        </div>
+      </div>
       {/* Page 7 - Scrolling Text */}
       <div id="page7">
         <div id="slide7">
           <h1>
-            Double A Granite<sup>®</sup>
+            Double A Granite<sup></sup>
           </h1>
           <h1>
-            Double A Granite<sup>®</sup>
+            Double A Granite<sup></sup>
           </h1>
         </div>
-      </div>
-
-      {/* Background Image */}
-      <div id="page8">
-        <img
-          data-scroll
-          data-scroll-speed="-2"
-          src="/public/dramatic-slab.png"
-          alt=""
-        />
       </div>
 
       {/* Footer */}

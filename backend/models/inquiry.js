@@ -9,13 +9,13 @@ const InquirySchema = new mongoose.Schema({
   edgeProfile: { type: String, required: true },
   color: { type: String },
   squareFootage: { type: String },
+  knowsSquareFootage: {type: String},
   sinkCutout: { type: String, required: true },
   measurementDate: { type: String },
   installationDate: { type: String },
   notes: { type: String },
   estimate: { type: String },
   paymentMethod: { type: String },
-  financing: { type: String },
   status: { type: String, enum: ["Pending", "In Progress", "Completed"], default: "Pending" },
   materialsUsed: [{ type: String }],  // Store materials
   laborCost: Number,
@@ -26,8 +26,6 @@ const InquirySchema = new mongoose.Schema({
   materialsObtained: { type: Boolean, default: false },
   depositMade: { type: Boolean, default: false },
   estimatedCompletionDate: { type: Date },
-
-
 }, { timestamps: true });
 
 export const Inquiry = mongoose.model("Inquiry", InquirySchema);
