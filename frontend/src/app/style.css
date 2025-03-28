@@ -765,7 +765,8 @@
         width: 35%;
         height: 22vh;
         top: 40%;
-        left: 10%;
+        right: 5%; /* Positions from right edge instead */
+        left: auto; /* Disables left positioning */
     }
 
     #ig4-container {
@@ -1009,7 +1010,7 @@
     }
 
     #ig10-container {
-        display: block !important; /* Ensure it's not hidden */
+        display: relative; /* Ensure it's not hidden */
         max-width: 100%; /* Adjust width for responsiveness */
         height: auto; /* Maintain aspect ratio */
       }
