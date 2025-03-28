@@ -768,7 +768,10 @@
 
     .floating-text-container {
         padding: 5vh 20px !important;
+        display: block !important;
         text-align: center;
+        position: relative;
+        z-index: 10;
     }
 
     .floating-text {
@@ -808,6 +811,9 @@
     #down #line2 {
         display: none;
         height: 0px;
+    }
+    #page2 #line {
+        display: none;
     }
 
     /* Page 3 adjustments */
@@ -911,6 +917,9 @@
         height: auto;
         padding: 20px 0;
         text-align: center;
+    }
+    #line3-vt {
+        display: none;
     }
 
     /* CTA button adjustments */
