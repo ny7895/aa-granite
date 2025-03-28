@@ -13,5 +13,16 @@
     "pdfkit": "^0.16.0",
     "twilio": "^5.5.0"
   },
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  }
 }
