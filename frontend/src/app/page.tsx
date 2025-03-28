@@ -3,8 +3,6 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import "./style.css";
-// Import Locomotive Scroll & GSAP
-import LocomotiveScroll from "locomotive-scroll";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -31,20 +29,57 @@ export default function Home() {
     if (typeof window !== "undefined") {
       gsap.registerPlugin(ScrollTrigger);
 
+      const isMobile = window.innerWidth <= 768;
+
+      const setupMobileScrolling = () => {
+        const scrollEl = document.querySelector("#main") as HTMLElement;
+        if (scrollEl) {
+          scrollEl.style.overflow = "visible";
+          scrollEl.style.height = "auto";
+        }
+        ScrollTrigger.defaults({ scroller: window });
+        ScrollTrigger.refresh();
+      };
+
+      if (isMobile) {
+        setupMobileScrolling();
+        return;
+      }
+
       import("locomotive-scroll").then((LocomotiveScrollModule) => {
         const scrollEl = document.querySelector("#main") as HTMLElement;
         if (!scrollEl) return;
 
+        // Correct initialization without breakpoint
         const scroll = new LocomotiveScrollModule.default({
           el: scrollEl,
           smooth: true,
+          // Official API only accepts 'smooth' for devices
+          smartphone: {
+            smooth: false,
+          },
+          tablet: {
+            breakpoint: 0,
+          },
         }) as unknown as ExtendedLocomotiveScroll;
 
-        // Scroll event handler
+        // Event handlers
         const handleScroll = () => ScrollTrigger.update();
-        scroll.on("scroll", handleScroll);
+        const handleRefresh = () => scroll.update();
+        const handleResize = () => {
+          if (window.innerWidth <= 768) {
+            setupMobileScrolling();
+            scroll.destroy();
+          } else {
+            ScrollTrigger.refresh();
+          }
+        };
 
-        // Scroller proxy configuration
+        scroll.on?.("scroll", handleScroll);
+        ScrollTrigger.addEventListener("refresh", handleRefresh);
+        window.addEventListener("resize", handleResize);
+
+        // Scroller proxy
         ScrollTrigger.scrollerProxy("#main", {
           scrollTop(value) {
             if (typeof value === "number") {
@@ -64,36 +99,28 @@ export default function Home() {
           pinType: scrollEl.style.transform ? "transform" : "fixed",
         });
 
-        // Resize handler
-        const handleResize = () => ScrollTrigger.refresh();
-        window.addEventListener("resize", handleResize);
-
-        // Refresh handler
-        const handleRefresh = () => scroll.update();
-        ScrollTrigger.addEventListener("refresh", handleRefresh);
         ScrollTrigger.refresh();
 
-        // Page8 animations
-        gsap.utils.toArray(".staggered-row").forEach((row: any, i) => {
-          const heading = row.querySelector(".section-heading");
-          const description = row.querySelector(".section-description");
-          const image = row.querySelector(".image-contain");
+        // Animation setup with proper typing
+        gsap.utils.toArray<HTMLElement>(".staggered-row").forEach((row, i) => {
+          const heading = row.querySelector(".section-heading") as HTMLElement;
+          const description = row.querySelector(
+            ".section-description"
+          ) as HTMLElement;
+          const image = row.querySelector(".image-contain") as HTMLElement;
 
-          // Set initial visible state
           gsap.set([heading, description], { opacity: 1, y: 0 });
 
-          // Create timeline for each row
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: row,
               start: "top 80%",
               end: "bottom 20%",
               scrub: 1,
-              scroller: "#main",
+              scroller: isMobile ? window : "#main",
             },
           });
 
-          // Animation sequence
           tl.from(heading, {
             y: 100,
             opacity: 0,
@@ -118,15 +145,14 @@ export default function Home() {
               "-=0.6"
             );
         });
+
         // Cleanup function
         return () => {
           ScrollTrigger.removeEventListener("refresh", handleRefresh);
-          if (scroll.off) {
-            scroll.off("scroll", handleScroll);
-          }
+          scroll.off?.("scroll", handleScroll);
           window.removeEventListener("resize", handleResize);
           ScrollTrigger.clearMatchMedia();
-          scroll.destroy();
+          scroll.destroy?.();
         };
       });
     }
