@@ -1012,11 +1012,21 @@
     }
 
     #ig10-container {
-        display: relative; /* Change from absolute to relative for better flow */
-        width: 80%; /* Slightly wider for better centering */
-        height: 35vh; /* Adjusted height */
-        left: 0; /* Reset any absolute positioning */
-        right: 0; /* Reset any absolute positioning */
+        position: absolute; /* Required for precise placement */
+        width: 80%;
+        height: 35vh;
+        
+        /* Horizontal centering */
+        left: 50%;
+        transform: translateX(-50%); /* Pulls back by half the width */
+        
+        /* Vertical positioning */
+        top: 50%; /* Adjust this value as needed */
+        margin-top: -17.5vh; /* Half of height (35vh/2) */
+        
+        /* Visual debug (remove after testing) */
+        border: 2px solid red;
+        z-index: 10;
       }
 
     /* Ensure GSAP elements are visible */
