@@ -8,8 +8,8 @@ const users = [
     role: "admin",
   },
   {
-    email: "owner@example.com",
-    password: bcrypt.hashSync("OwnerPass456!", 10),
+    email: "kat.bejarano@hotmail.com",
+    password: bcrypt.hashSync("Gisellebm12!", 10),
     role: "admin",
   },
 ];
