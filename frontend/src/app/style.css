@@ -1,61 +1,79 @@
 /* Locomotive Scroll styles */
-@import "locomotive-scroll/dist/locomotive-scroll.css";
-/* Add these at the top of your CSS file */
+/* Remove Locomotive Scroll import */
+/* @import "locomotive-scroll/dist/locomotive-scroll.css"; */
+
+/* Custom properties remain the same */
 @property --angle-1 {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: -75deg;
-}
-
-@property --angle-2 {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: -45deg;
-}
-
-:root {
-  --global--size: clamp(2rem, 4vw, 5rem);
-  --anim--hover-time: 400ms;
-  --anim--hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
-}
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Times New Roman", Times, serif;
-}
-
-html, body {
-    height: 100%;
-    overflow: hidden;
-    background-color: #151519;
-    color: #A9ABB5;
-}
-
-.c-scrollbar {
-    display: none !important;
-}
-
-#site-title {
-    font-size: 5rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    text-align: center;
-    color: white;
-    font-family: Georgia, serif;
-    letter-spacing: 2px;
-    z-index: 999;
-}
-
-#main {
-    width: 100%;
-    overflow: hidden;
-    color: #A9ABB5;
-}
-
-#main[data-scroll-container] {
-    position: relative;
-}
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: -75deg;
+  }
+  
+  @property --angle-2 {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: -45deg;
+  }
+  
+  :root {
+    --global--size: clamp(2rem, 4vw, 5rem);
+    --anim--hover-time: 400ms;
+    --anim--hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Times New Roman", Times, serif;
+  }
+  
+  /* Enable scrolling by removing overflow: hidden */
+  html, body {
+      height: 100%;
+      overflow-x: hidden;
+      background-color: #151519;
+      color: #A9ABB5;
+  }
+  
+  /* Remove Locomotive Scroll specific classes */
+  /* .c-scrollbar {
+      display: none !important;
+  } */
+  
+  #site-title {
+      font-size: 5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      text-align: center;
+      color: white;
+      font-family: Georgia, serif;
+      letter-spacing: 2px;
+      z-index: 999;
+  }
+  
+  #main {
+      width: 100%;
+      /* Remove overflow: hidden to enable scrolling */
+      color: #A9ABB5;
+  }
+  
+  /* Remove Locomotive Scroll data attribute styles */
+  /* #main[data-scroll-container] {
+      position: relative;
+  } */
+  
+  #page1 {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      background-color: #151519;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      /* Remove overflow: hidden */
+  }
 
 #page1 {
     position: relative;
@@ -676,11 +694,16 @@ html, body {
   100% { background-position: 0px, 50px; }
 }
 @media (max-width: 768px) {
-    /* General adjustments */
     html, body {
         overflow-x: hidden;
+        /* Ensure scrolling is enabled */
+        overflow-y: auto;
     }
-    
+    #main {
+        /* Ensure main container doesn't restrict scrolling */
+        overflow: visible;
+        height: auto;
+    }
     /* Page 1 adjustments */
     #site-title {
         font-size: 3rem;
@@ -718,6 +741,7 @@ html, body {
     #page2 {
         height: auto;
         padding: 50px 20px;
+        min-height: 100vh;
     }
     
     #page2 h1 {
@@ -750,6 +774,7 @@ html, body {
         height: auto;
         flex-direction: column;
         padding: 50px 20px;
+        min-height: 100vh;
     }
     
     #page3 #left,
@@ -781,6 +806,7 @@ html, body {
     #page6 {
         height: auto;
         padding: 50px 20px;
+        min-height: 100vh;
     }
     
     #elem3 {
@@ -798,7 +824,7 @@ html, body {
     #page7 {
         height: auto;
         padding: 30px 20px;
-        overflow: hidden;
+        min-height: 100vh;
     }
     
     #slide7 h1 {
@@ -817,11 +843,22 @@ html, body {
         height: auto;
         padding: 20px;
     }
+    .staggered-row {
+        flex-direction: column;
+        margin-bottom: 10vh;
+    }
     
     #footer #bottom {
         flex-direction: column;
         height: auto;
         padding: 20px 0;
+    }
+    .section-heading {
+        font-size: 2.5rem;
+    }
+    .section-description {
+        font-size: 1.2rem;
+        max-width: 100%;
     }
     
     /* CTA button adjustments */
