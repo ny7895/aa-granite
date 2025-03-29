@@ -17,7 +17,7 @@ router.post("/login", async (req, res) => {
   }
 
   // ✅ Generate a JWT Token with `role: "admin"`
-  const token = jwt.sign({ email: user.email, role: "admin" }, process.env.JWT_secret, { expiresIn: "2h" });
+  const token = jwt.sign({ email: user.email, role: "admin" }, process.env.JWT_SECRET, { expiresIn: "2h" });
 
   console.log("✅ Admin Logged In:", user.email);
   res.json({ token });
