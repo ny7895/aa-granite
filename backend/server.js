@@ -20,6 +20,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const allowedOrigins = [
   'https://aa-granite.vercel.app/',
+  "https://aa-granite-noahs-projects-7ed94e02.vercel.app/"
 ];
 // Middleware
 app.use(express.json());
