@@ -2,8 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone", // Ensures proper build for Amplify
-  images: { unoptimized: true }, // Fixes Amplify image issues
-  reactStrictMode: true,
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+
 };
 
 export default nextConfig;
