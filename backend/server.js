@@ -18,9 +18,16 @@ const app = express();
 const JWT_SECRET = process.env.JWT_SECRET;
 // const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN); // ❌ Twilio Disabled
 
+const allowedOrigins = [
+  'https://aa-granite.vercel.app/',
+];
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true, 
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
 
 // Connect to MongoDB
 mongoose
