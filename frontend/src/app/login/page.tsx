@@ -2,12 +2,11 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
-import styles from "../login/LoginPage.module.css"; // Import the CSS module
+import styles from "../login/LoginPage.module.css";
 
-// Define expected structure of the decoded token
 interface DecodedToken {
   exp: number;
-  role?: string; // Optional if it might not exist in all tokens
+  role?: string;
 }
 
 export default function LoginPage() {

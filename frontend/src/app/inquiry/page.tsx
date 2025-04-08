@@ -4,7 +4,6 @@ import styles from "./inquiry.module.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Add this type definition at the top (with other imports)
 type ExtendedLocomotiveScroll = {
   scrollTo: (
     target: Element | string | number,
@@ -24,7 +23,6 @@ type ExtendedLocomotiveScroll = {
 };
 
 export default function InquiryForm() {
-  // Your existing state declarations remain exactly the same
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -44,7 +42,6 @@ export default function InquiryForm() {
 
   const [message, setMessage] = useState("");
 
-  // Add this useEffect hook right after your state declarations
   useEffect(() => {
     if (typeof window !== "undefined") {
       gsap.registerPlugin(ScrollTrigger);
@@ -98,7 +95,6 @@ export default function InquiryForm() {
     }
   }, []);
 
-  // Your existing handleChange and handleSubmit functions remain exactly the same
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -171,7 +167,7 @@ export default function InquiryForm() {
           </div>
         </div>
 
-        {/* Right Column - Your Existing Form */}
+        {/* Right Column */}
         <div className={styles.inquiryFormContainer}>
           <h1 className={styles.inquiryTitle}>Request a Quote</h1>
           <p className={styles.inquirySubtitle}>

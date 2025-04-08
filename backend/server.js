@@ -7,7 +7,6 @@ import nodemailer from "nodemailer";
 import authRoutes from './routes/authRoutes.js';
 import User from "./models/users.js"; // ✅ Import User model
 import Inquiry from "./models/inquiry.js"; // ✅ Import Inquiry model
-// import twilio from "twilio"; // ❌ Twilio Disabled
 import csvRoutes from "./routes/csvRoutes.js";
 import invoiceRoutes from "./routes/invoiceRoutes.js";
 
@@ -16,12 +15,8 @@ import invoiceRoutes from "./routes/invoiceRoutes.js";
 dotenv.config();
 const app = express();
 const JWT_SECRET = process.env.JWT_SECRET;
-// const twilioClient = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN); // ❌ Twilio Disabled
 
-const allowedOrigins = [
-  'https://aa-granite.vercel.app/',
-  "http://localhost:3000"
-];
+const allowedOrigins = process.env.ALLOWED_ORIGINS;
 // Middleware
 app.use(express.json());
 app.use(cors({
@@ -43,8 +38,8 @@ mongoose
 const transporter = nodemailer.createTransport({
   service: "gmail", // Use Gmail, Outlook, or any other SMTP service
   auth: {
-    user: process.env.EMAIL_USER, // Your email
-    pass: process.env.EMAIL_PASS, // App password (if using Gmail, enable "App Passwords")
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 // API Routes
@@ -114,13 +109,6 @@ app.post("/api/inquiry", async (req, res) => {
       text: `Hello ${newInquiry.name},\n\nWe received your request. Our team will contact you soon!`,
     });
 
-    // 📱 Twilio SMS Notification (Disabled)
-    // await twilioClient.messages.create({
-    //   body: `New Inquiry from ${newInquiry.name}. Check the admin panel for details.`,
-    //   from: process.env.TWILIO_PHONE,
-    //   to: process.env.OWNER_PHONE,
-    // });
-
     res.status(201).json({ message: "Inquiry submitted successfully!" });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -143,4 +131,4 @@ app.get("/", (req, res) => {
 
 // Start Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Server running on port ${PORT}`));

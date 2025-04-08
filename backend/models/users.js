@@ -1,15 +1,18 @@
 import bcrypt from "bcryptjs";
+import dotenv from "dotenv";
+
+dotenv.config(); // Load .env values
 
 // 🔹 Store Admin Users Here
 const users = [
   {
-    email: "noahy78951@gmail.com",
-    password: bcrypt.hashSync("k1DYwGBd1i6kQIps", 10), // 🔒 Hashed Password
+    email: process.env.ADMIN_EMAIL1,
+    password: bcrypt.hashSync(process.env.ADMIN_PASSWORD1, 10),
     role: "admin",
   },
   {
-    email: "kat.bejarano@hotmail.com",
-    password: bcrypt.hashSync("Gisellebm12!", 10),
+    email: process.env.ADMIN_EMAIL2,
+    password: bcrypt.hashSync(process.env.ADMIN_PASSWORD2, 10),
     role: "admin",
   },
 ];

@@ -11,8 +11,8 @@ const router = express.Router();
 const transporter = nodemailer.createTransport({
   service: "gmail", // or another email service
   auth: {
-    user: process.env.EMAIL_USER, // Your email
-    pass: process.env.EMAIL_PASS, // App password
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS, 
   },
 });
 router.get('/', async (req, res) => {
@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
     // Send email notification
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: "noahy78951@gmail.com", // Replace with the business owner's email
+      to: "noahy78951@gmail.com", 
       subject: "New Inquiry Received",
       text: `You have a new inquiry from ${req.body.name}.
       

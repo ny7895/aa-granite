@@ -161,4 +161,68 @@
   .logoutButton:hover {
     background-color: #c82333;
   }
-  
+  /* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .header {
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .exportButton,
+  .logoutButton {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 0;
+  }
+
+  .table thead,
+  .table tbody,
+  .table th,
+  .table td,
+  .table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .table th {
+    text-align: left;
+    font-size: 14px;
+    background-color: #007bff;
+  }
+
+  .table td {
+    font-size: 13px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .callButton,
+  .invoiceButton,
+  .viewButton,
+  .updateButton,
+  .deleteButton {
+    width: 100%;
+    margin-top: 5px;
+    font-size: 13px;
+  }
+
+  .statusDropdown,
+  .paymentStatusDropdown,
+  .textarea {
+    width: 100%;
+    font-size: 14px;
+  }
+}
