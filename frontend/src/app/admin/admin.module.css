@@ -1,12 +1,11 @@
 /* General Layout */
 .container {
-  padding: 15px;
+  padding: 20px;
   font-family: Arial, sans-serif;
   max-width: 1900px;
   margin: auto;
   background-color: #000000;
   border-radius: 10px;
-  box-sizing: border-box;
 }
 
 /* Header */
@@ -30,9 +29,6 @@
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s ease;
-  width: 100%;
-  max-width: 300px;
-  box-sizing: border-box;
 }
 
 .exportButton:hover {
@@ -40,21 +36,13 @@
 }
 
 /* Table */
-.table-container {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  background-color: #414141;
-}
-
 .table {
   width: 100%;
-  min-width: 600px; /* Ensures table doesn't collapse too much */
   border-collapse: collapse;
   background-color: #414141;
   border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .table th,
@@ -62,15 +50,12 @@
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-  white-space: nowrap;
 }
 
 .table th {
   background-color: #007bff;
   color: #fff;
   font-weight: bold;
-  position: sticky;
-  top: 0;
 }
 
 .table tr:hover {
@@ -86,7 +71,6 @@
   border: 1px solid #5e5e5e;
   background-color: #474747;
   cursor: pointer;
-  color: #fff;
 }
 
 .statusDropdown:focus,
@@ -101,16 +85,9 @@
   border-radius: 5px;
   border: 1px solid #d49c9c;
   resize: vertical;
-  box-sizing: border-box;
 }
 
 /* Buttons */
-.button-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
 .callButton,
 .invoiceButton,
 .viewButton,
@@ -121,10 +98,6 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
-  flex: 1;
-  min-width: 60px;
-  text-align: center;
-  font-size: 13px;
 }
 
 .callButton {
@@ -147,13 +120,12 @@
 
 .updateButton {
   background-color: #3843db;
-  color: #fff;
+  color: #000;
 }
 
 .invoiceButton:hover {
   background-color: #e0a800;
 }
-
 .viewButton {
   background-color: #007bff;
   color: #fff;
@@ -176,7 +148,6 @@
 .logoutButton {
   display: block;
   width: 100%;
-  max-width: 300px;
   padding: 12px;
   background-color: #dc3545;
   color: #fff;
@@ -185,79 +156,52 @@
   font-size: 16px;
   cursor: pointer;
   transition: background 0.3s ease;
-  margin: 20px auto 0;
-  box-sizing: border-box;
 }
 
 .logoutButton:hover {
   background-color: #c82333;
 }
-
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .container {
-      padding: 10px;
-      width: 100%;
-      border-radius: 0;
+    padding: 15px;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+  }
+
+  .table {
+    min-width: 600px; /* Prevent table from shrinking too much */
+    width: 100%;
+    display: block; /* Needed for overflow to work properly */
+    overflow-x: auto;
   }
 
   .header {
-      font-size: 22px;
-      margin-bottom: 15px;
+    font-size: 24px;
   }
 
   .exportButton,
   .logoutButton {
-      font-size: 14px;
-      padding: 10px;
+    width: 90%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .table th,
+  /* Slightly reduce padding on mobile */
+  .table th, 
   .table td {
-      padding: 8px;
-      font-size: 14px;
+    padding: 10px 8px;
   }
 
-  .table th {
-      font-size: 14px;
-  }
-
-  .statusDropdown,
-  .paymentStatusDropdown,
-  .textarea {
-      font-size: 14px;
-  }
-
-  .button-group {
-      flex-direction: column;
-  }
-
+  /* Make buttons more touch-friendly */
   .callButton,
   .invoiceButton,
   .viewButton,
   .updateButton,
   .deleteButton {
-      width: 100%;
-      margin-top: 5px;
-      padding: 8px;
-  }
-}
-
-/* Very small screens */
-@media (max-width: 480px) {
-  .header {
-      font-size: 20px;
-  }
-
-  .table th,
-  .table td {
-      padding: 6px;
-      font-size: 13px;
-  }
-
-  .statusDropdown,
-  .paymentStatusDropdown {
-      padding: 6px;
-      font-size: 13px;
+    padding: 8px 10px;
+    margin: 2px 0;
+    min-width: 60px; /* Prevent button text wrapping */
   }
 }
