@@ -16,7 +16,9 @@ dotenv.config();
 const app = express();
 const JWT_SECRET = process.env.JWT_SECRET;
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS;
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',')
+  : [];
 // Middleware
 app.use(express.json());
 app.use(cors({
