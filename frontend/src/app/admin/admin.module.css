@@ -1,228 +1,263 @@
 /* General Layout */
 .container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    max-width: 1900px;
-    margin: auto;
-    background-color: #000000;
-    border-radius: 10px;
-  }
-  
-  /* Header */
-  .header {
-    text-align: center;
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #b8b8b8;
-    width: 100%;
-  }
-  
-  /* Export Button */
-  .exportButton {
-    display: block;
-    margin: 10px auto;
-    padding: 12px;
-    background-color: #17a2b8;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .exportButton:hover {
-    background-color: #138496;
-  }
-  
-  /* Table */
-  .table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #414141;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .table th,
-  .table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .table th {
-    background-color: #007bff;
-    color: #fff;
-    font-weight: bold;
-  }
-  
-  .table tr:hover {
-    background-color: #575757;
-  }
-  
-  /* Status Dropdown */
-  .statusDropdown,
-  .paymentStatusDropdown {
-    padding: 8px;
-    font-size: 14px;
-    border-radius: 4px;
-    border: 1px solid #5e5e5e;
-    background-color: #474747;
-    cursor: pointer;
-  }
-  
-  .statusDropdown:focus,
-  .paymentStatusDropdown:focus {
-    outline: 2px solid #555555;
-  }
-  
-  /* Form Inputs */
-  .textarea {
-    width: 100%;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #d49c9c;
-    resize: vertical;
-  }
-  
-  /* Buttons */
-  .callButton,
-  .invoiceButton,
-  .viewButton,
-  .updateButton,
-  .deleteButton {
-    padding: 6px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .callButton {
-    background-color: #28a745;
-    color: #fff;
-  }
-  
-  .callButton:hover {
-    background-color: #218838;
-  }
-  
-  .invoiceButton {
-    background-color: #ffc107;
-    color: #000;
-  }
-  
-  .updateButton:hover {
-    background-color: #0228ff;
-  }
-  
-  .updateButton {
-    background-color: #3843db;
-    color: #000;
-  }
-  
-  .invoiceButton:hover {
-    background-color: #e0a800;
-  }
-  .viewButton {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  .viewButton:hover {
-    background-color: #0056b3;
-  }
-  
-  .deleteButton {
-    background-color: #dc3545;
-    color: #fff;
-  }
-  
-  .deleteButton:hover {
-    background-color: #f55263;
-  }
-  
-  /* Logout Button */
-  .logoutButton {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .logoutButton:hover {
-    background-color: #c82333;
-  }
-  /* Mobile Responsiveness */
+  padding: 15px;
+  font-family: Arial, sans-serif;
+  max-width: 1900px;
+  margin: auto;
+  background-color: #000000;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #b8b8b8;
+  width: 100%;
+}
+
+/* Export Button */
+.exportButton {
+  display: block;
+  margin: 10px auto;
+  padding: 12px;
+  background-color: #17a2b8;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+.exportButton:hover {
+  background-color: #138496;
+}
+
+/* Table */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: #414141;
+}
+
+.table {
+  width: 100%;
+  min-width: 600px; /* Ensures table doesn't collapse too much */
+  border-collapse: collapse;
+  background-color: #414141;
+  border-radius: 8px;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+}
+
+.table th {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+}
+
+.table tr:hover {
+  background-color: #575757;
+}
+
+/* Status Dropdown */
+.statusDropdown,
+.paymentStatusDropdown {
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #5e5e5e;
+  background-color: #474747;
+  cursor: pointer;
+  color: #fff;
+}
+
+.statusDropdown:focus,
+.paymentStatusDropdown:focus {
+  outline: 2px solid #555555;
+}
+
+/* Form Inputs */
+.textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #d49c9c;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.callButton,
+.invoiceButton,
+.viewButton,
+.updateButton,
+.deleteButton {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  flex: 1;
+  min-width: 60px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.callButton {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.callButton:hover {
+  background-color: #218838;
+}
+
+.invoiceButton {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.updateButton:hover {
+  background-color: #0228ff;
+}
+
+.updateButton {
+  background-color: #3843db;
+  color: #fff;
+}
+
+.invoiceButton:hover {
+  background-color: #e0a800;
+}
+
+.viewButton {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.viewButton:hover {
+  background-color: #0056b3;
+}
+
+.deleteButton {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.deleteButton:hover {
+  background-color: #f55263;
+}
+
+/* Logout Button */
+.logoutButton {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  padding: 12px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin: 20px auto 0;
+  box-sizing: border-box;
+}
+
+.logoutButton:hover {
+  background-color: #c82333;
+}
+
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
   .container {
-    padding: 10px;
-    max-width: 100%;
-    overflow-x: auto;
+      padding: 10px;
+      width: 100%;
+      border-radius: 0;
   }
 
   .header {
-    font-size: 22px;
-    text-align: center;
-    margin-bottom: 15px;
+      font-size: 22px;
+      margin-bottom: 15px;
   }
 
   .exportButton,
   .logoutButton {
-    width: 100%;
-    font-size: 14px;
-    padding: 10px;
+      font-size: 14px;
+      padding: 10px;
   }
 
-  .table {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    border-radius: 0;
-  }
-
-  .table thead,
-  .table tbody,
   .table th,
-  .table td,
-  .table tr {
-    display: block;
-    width: 100%;
+  .table td {
+      padding: 8px;
+      font-size: 14px;
   }
 
   .table th {
-    text-align: left;
-    font-size: 14px;
-    background-color: #007bff;
-  }
-
-  .table td {
-    font-size: 13px;
-    border-bottom: 1px solid #ccc;
-  }
-
-  .callButton,
-  .invoiceButton,
-  .viewButton,
-  .updateButton,
-  .deleteButton {
-    width: 100%;
-    margin-top: 5px;
-    font-size: 13px;
+      font-size: 14px;
   }
 
   .statusDropdown,
   .paymentStatusDropdown,
   .textarea {
-    width: 100%;
-    font-size: 14px;
+      font-size: 14px;
+  }
+
+  .button-group {
+      flex-direction: column;
+  }
+
+  .callButton,
+  .invoiceButton,
+  .viewButton,
+  .updateButton,
+  .deleteButton {
+      width: 100%;
+      margin-top: 5px;
+      padding: 8px;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .header {
+      font-size: 20px;
+  }
+
+  .table th,
+  .table td {
+      padding: 6px;
+      font-size: 13px;
+  }
+
+  .statusDropdown,
+  .paymentStatusDropdown {
+      padding: 6px;
+      font-size: 13px;
   }
 }
