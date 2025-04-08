@@ -679,7 +679,43 @@
   animation: 4s glint linear backwards infinite;
   animation-delay: -3s;
 }
-
+.see-our-work-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 0;
+    background-color: #151519;
+  }
+  
+  .see-our-work-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background-color: #A9ABB5;
+    color: #161616;
+    border: 1px solid #1a1a1a;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .see-our-work-button:hover {
+    background-color: #4a4a4a;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .see-our-work-button svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .see-our-work-button:hover svg {
+    transform: translateX(4px);
+  }
 /* Animations */
 @keyframes glint {
   0% { left: -120%; }

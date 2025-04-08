@@ -28,15 +28,15 @@ export default function InquiryForm() {
     phone: "",
     email: "",
     address: "",
-    material: "Granite",
-    edgeProfile: "Straight",
+    material: "",
+    edgeProfile: "",
     color: "",
     squareFootage: "",
-    sinkCutout: "No",
+    sinkCutout: "",
     measurementDate: "",
     installationDate: "",
     notes: "",
-    estimate: "Yes",
+    estimate: "",
     knowsSquareFootage: "",
   });
 
@@ -129,15 +129,15 @@ export default function InquiryForm() {
           phone: "",
           email: "",
           address: "",
-          material: "Granite",
-          edgeProfile: "Straight",
+          material: "",
+          edgeProfile: "",
           color: "",
           squareFootage: "",
-          sinkCutout: "No",
+          sinkCutout: "",
           measurementDate: "",
           installationDate: "",
           notes: "",
-          estimate: "Yes",
+          estimate: "",
           knowsSquareFootage: "",
         });
       } else {
@@ -164,6 +164,7 @@ export default function InquiryForm() {
             <p>Available for consultations</p>
             <p>contact@doubleagranite.com</p>
             <p>123-456-7890</p>
+            <p>se habla español</p>
           </div>
         </div>
 
@@ -256,7 +257,7 @@ export default function InquiryForm() {
                 <option value="Straight">Straight</option>
                 <option value="Beveled">Beveled</option>
                 <option value="Rounded">Rounded</option>
-                <option value="Not sure">Rounded</option>
+                <option value="Not sure">Not sure</option>
               </select>
             </div>
 
