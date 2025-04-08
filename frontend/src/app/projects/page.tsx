@@ -51,124 +51,181 @@ export default function Projects() {
     };
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    if (typeof window !== "undefined") {
+      gsap.registerPlugin(ScrollTrigger);
 
-    // Initial setup
-    gsap.set(imagesRef.current, {
-      y: "30vh",
-      scale: 0.95,
-      opacity: 0,
-    });
-    gsap.set([titlesRef.current, descriptionsRef.current], {
-      x: -30,
-      opacity: 0,
-    });
+      // Mobile detection and setup
+      const isMobile = window.innerWidth <= 768;
 
-    sectionsRef.current.forEach((section, i) => {
-      if (!section) return;
+      if (isMobile) {
+        // Mobile-specific setup - ensure all content is visible immediately
+        gsap.set(
+          [
+            ...imagesRef.current,
+            ...titlesRef.current,
+            ...descriptionsRef.current,
+          ],
+          {
+            opacity: 1,
+            y: 0,
+            x: 0,
+            scale: 1,
+          }
+        );
 
-      // Hide scroll hint when reaching last section
-      if (i === projects.length - 1) {
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top center",
-          end: "bottom center",
-          onEnter: () => setShowScrollHint(false),
-          onLeaveBack: () => setShowScrollHint(true),
+        // Simple fade-in animation for mobile
+        gsap.utils
+          .toArray<HTMLElement>(".project-section")
+          .forEach((section, i) => {
+            const image = section.querySelector(
+              ".project-image"
+            ) as HTMLElement;
+            const title = section.querySelector(
+              ".project-title"
+            ) as HTMLElement;
+            const desc = section.querySelector(
+              ".project-description"
+            ) as HTMLElement;
+
+            const tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: section,
+                start: "top 85%",
+                end: "bottom 15%",
+                toggleActions: "play none none none",
+              },
+            });
+
+            tl.from([title, desc, image], {
+              opacity: 0,
+              y: 30,
+              duration: 0.8,
+              stagger: 0.1,
+              ease: "power2.out",
+            });
+          });
+
+        // Hide scroll hint on mobile
+        setShowScrollHint(false);
+      } else {
+        // Desktop animations (original implementation)
+        gsap.set(imagesRef.current, {
+          y: "30vh",
+          scale: 0.95,
+          opacity: 0,
+        });
+        gsap.set([titlesRef.current, descriptionsRef.current], {
+          x: -30,
+          opacity: 0,
+        });
+
+        sectionsRef.current.forEach((section, i) => {
+          if (!section) return;
+
+          // Hide scroll hint when reaching last section
+          if (i === projects.length - 1) {
+            ScrollTrigger.create({
+              trigger: section,
+              start: "top center",
+              end: "bottom center",
+              onEnter: () => setShowScrollHint(false),
+              onLeaveBack: () => setShowScrollHint(true),
+            });
+          }
+
+          // Text color change
+          ScrollTrigger.create({
+            trigger: section,
+            start: "top center",
+            end: "bottom center",
+            onEnter: () => {
+              gsap.to(scrollHintRef.current, {
+                color: projects[i].textColor,
+                duration: 0.5,
+              });
+            },
+            onEnterBack: () => {
+              gsap.to(scrollHintRef.current, {
+                color: projects[i].textColor,
+                duration: 0.5,
+              });
+            },
+          });
+
+          // Image animation
+          gsap.to(imagesRef.current[i], {
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 90%",
+              end: "top 40%",
+              scrub: 1,
+            },
+          });
+
+          // Text animation
+          gsap.to(titlesRef.current[i], {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+              end: "top 60%",
+              scrub: 1,
+            },
+          });
+
+          gsap.to(descriptionsRef.current[i], {
+            x: 0,
+            opacity: 1,
+            duration: 0.8,
+            delay: 0.1,
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+              end: "top 60%",
+              scrub: 1,
+            },
+          });
+
+          // Push previous image up when leaving
+          ScrollTrigger.create({
+            trigger: section,
+            start: "top top",
+            end: "bottom top",
+            onLeave: () => {
+              if (i > 0) {
+                gsap.to(imagesRef.current[i - 1], {
+                  y: "-30vh",
+                  scale: 0.9,
+                  opacity: 0,
+                  duration: 0.8,
+                });
+              }
+            },
+            onEnterBack: () => {
+              if (i > 0) {
+                gsap.to(imagesRef.current[i - 1], {
+                  y: 0,
+                  scale: 1,
+                  opacity: 1,
+                  duration: 0.8,
+                });
+              }
+            },
+          });
         });
       }
 
-      // Text color change
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top center",
-        end: "bottom center",
-        onEnter: () => {
-          gsap.to(scrollHintRef.current, {
-            color: projects[i].textColor,
-            duration: 0.5,
-          });
-        },
-        onEnterBack: () => {
-          gsap.to(scrollHintRef.current, {
-            color: projects[i].textColor,
-            duration: 0.5,
-          });
-        },
-      });
-
-      // Image animation
-      gsap.to(imagesRef.current[i], {
-        y: 0,
-        scale: 1,
-        opacity: 1,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 90%",
-          end: "top 40%",
-          scrub: 1,
-        },
-      });
-
-      // Text animation
-      gsap.to(titlesRef.current[i], {
-        x: 0,
-        opacity: 1,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          end: "top 60%",
-          scrub: 1,
-        },
-      });
-
-      gsap.to(descriptionsRef.current[i], {
-        x: 0,
-        opacity: 1,
-        duration: 0.8,
-        delay: 0.1,
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          end: "top 60%",
-          scrub: 1,
-        },
-      });
-
-      // Push previous image up when leaving
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: "bottom top",
-        onLeave: () => {
-          if (i > 0) {
-            gsap.to(imagesRef.current[i - 1], {
-              y: "-30vh",
-              scale: 0.9,
-              opacity: 0,
-              duration: 0.8,
-            });
-          }
-        },
-        onEnterBack: () => {
-          if (i > 0) {
-            gsap.to(imagesRef.current[i - 1], {
-              y: 0,
-              scale: 1,
-              opacity: 1,
-              duration: 0.8,
-            });
-          }
-        },
-      });
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
+      return () => {
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      };
+    }
   }, []);
 
   return (
