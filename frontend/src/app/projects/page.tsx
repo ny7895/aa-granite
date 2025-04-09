@@ -233,6 +233,7 @@ export default function Projects() {
       <div className="projects-hero">
         <h1>Our Expertise</h1>
         <p>Scroll to discover our craftsmanship</p>
+        <p>if images fail to load please refresh</p>
       </div>
 
       <div className="projects-container">
