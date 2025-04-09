@@ -162,8 +162,7 @@ export default function InquiryForm() {
 
           <div className={styles.contactDetails}>
             <p>Available for consultations</p>
-            <p>contact@doubleagranite.com</p>
-            <p>123-456-7890</p>
+            <p>DoubleAGraniteABQ@gmail.com</p>
             <p>se habla español</p>
           </div>
         </div>

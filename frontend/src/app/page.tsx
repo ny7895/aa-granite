@@ -5,6 +5,7 @@ import Link from "next/link";
 import "./style.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Head from "next/head";
 
 export default function Home() {
   useEffect(() => {
@@ -112,6 +113,38 @@ export default function Home() {
 
   return (
     <div id="main">
+      <Head>
+        <title>
+          Double A Granite | Custom Granite Countertops in Albuquerque
+        </title>
+        <meta
+          name="description"
+          content="Double A Granite specializes in custom granite, quartz, and marble countertops for residential and commercial spaces in Albuquerque, NM."
+        />
+        <meta
+          name="keywords"
+          content="Granite countertops, Albuquerque New Mexico granite, custom stone fabrication, quartz, marble, countertop installation, Double A Granite"
+        />
+        <meta name="author" content="Double A Granite" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {/* Open Graph for Social Media Sharing */}
+        <meta
+          property="og:title"
+          content="Double A Granite | Custom Granite Countertops in Albuquerque"
+        />
+        <meta
+          property="og:description"
+          content="Elevate your home or business with premium granite, quartz, and marble countertops from Double A Granite."
+        />
+        <meta
+          property="og:image"
+          content="/https://aa-granite.s3.us-east-1.amazonaws.com/dramatic-slabs.png"
+        />{" "}
+        {/* Replace with your image path */}
+        <meta property="og:url" content="https://www.doubleagranite.com" />
+        <meta property="og:type" content="website" />
+      </Head>
+
       {/* Hero Section */}
       <div id="page1">
         <div id="heading">
@@ -133,7 +166,7 @@ export default function Home() {
           <h4>© 2024</h4>
           <div id="line1"></div>
           <div id="line2"></div>
-          <h4>Turning slabs into statements</h4>
+          <h4>Turning slabs into statements in Albuquerque, New Mexico</h4>
         </div>
 
         <div className="floating-text-container">

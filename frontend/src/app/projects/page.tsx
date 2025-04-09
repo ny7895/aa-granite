@@ -10,7 +10,8 @@ const projects = [
   {
     id: 1,
     title: "Luxury Kitchen Remodel",
-    description: "Custom marble countertops",
+    description:
+      "Custom marble countertops installation in Albuquerque, NM by Double A Granite",
     category: "residential",
     bgColor: "#e8e0d9",
     textColor: "#1a1a1a",
@@ -19,7 +20,8 @@ const projects = [
   {
     id: 2,
     title: "Outside Bar",
-    description: "Commercial-grade marble outside bar top",
+    description:
+      "Commercial-grade marble outside bar top installation in Albuquerque, NM by Double A Granite",
     category: "commercial",
     bgColor: "#1a1a1a",
     textColor: "#ffffff",
@@ -28,7 +30,8 @@ const projects = [
   {
     id: 3,
     title: "Waterfall edge",
-    description: "Premium marble kitchen waterfall edge",
+    description:
+      "Premium marble kitchen waterfall edge installation in Albuquerque, NM by Double A Granite",
     category: "residential",
     bgColor: "#e8e0d9",
     textColor: "#1a1a1a",
@@ -233,7 +236,10 @@ export default function Projects() {
       <div className="projects-hero">
         <h1>Our Expertise</h1>
         <p>Scroll to discover our craftsmanship</p>
-        <p>if images fail to load please refresh</p>
+        <p>
+          Our granite countertop installation services in Albuquerque ensure
+          durability and elegance for any of your needs.
+        </p>
       </div>
 
       <div className="projects-container">
