@@ -123,7 +123,7 @@ export default function Home() {
         />
         <meta
           name="keywords"
-          content="Granite countertops, Albuquerque New Mexico granite, custom stone fabrication, quartz, marble, countertop installation, Double A Granite"
+          content="Granite countertops, Albuquerque New Mexico granite countertop, custom stone fabrication Albuquerque New Mexico, quartz, marble, countertop installation, Double A Granite Albuquerque New Mexico"
         />
         <meta name="author" content="Double A Granite" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -134,7 +134,7 @@ export default function Home() {
         />
         <meta
           property="og:description"
-          content="Elevate your home or business with premium granite, quartz, and marble countertops from Double A Granite."
+          content="Elevate your home or business with premium granite, quartz, and marble countertops from Double A Granite Albuquerque New Mexico"
         />
         <meta
           property="og:image"

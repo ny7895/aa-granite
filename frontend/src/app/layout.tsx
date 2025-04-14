@@ -16,18 +16,24 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Double A Granite | Premium Countertop Fabrication",
   description:
-    "Expert fabrication and installation of granite, quartz, and marble countertops. 20+ years of experience serving residential and commercial clients.",
+    "Expert fabrication and installation of granite, quartz, and marble countertops serving Albuquerque, New Mexico. 20+ years of experience serving residential and commercial clients in Albuquerque, New Mexico.",
   keywords: [
     "granite countertops",
     "quartz installation",
     "marble fabrication",
     "custom countertops",
+    "counter top fabricator Albuquerque, New Mexico",
+    "granite countertops Albuquerque, New Mexico",
+    "quartz installation Albuquerque, New Mexico",
+    "marble fabrication Albuquerque, New Mexico",
+    "custom countertops Albuquerque, New Mexico",
+    "Residential countertop fabricator Albuquerque, New Mexico",
   ],
   authors: [{ name: "Double A Granite" }],
   openGraph: {
     title: "Double A Granite | Premium Countertop Fabrication",
     description:
-      "Expert fabrication and installation of granite, quartz, and marble countertops",
+      "Expert fabrication and installation of granite, quartz, and marble countertops in Albuquerque, New Mexico",
     url: "https://doubleagranite.com",
     siteName: "Double A Granite",
     images: [
