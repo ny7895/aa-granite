@@ -112,7 +112,7 @@ export default function InquiryForm() {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/inquiry`,
+        `${process.env.NEXT_PUBLIC_API_URL}/inquiry`,
         {
           method: "POST",
           headers: {
