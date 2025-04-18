@@ -54,8 +54,28 @@ export default function Home() {
             ease: "power2.out",
           });
         });
+        gsap.from(".image-container", {
+          scale: 0.6,
+          opacity: 0,
+          duration: 1.2,
+          ease: "expo.out",
+          stagger: {
+            amount: 0.8,
+            from: "center",
+          },
+          delay: 0.3,
+        });
+
+        gsap.from("#site-title", {
+          y: 100,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power4.out",
+          delay: 1,
+        });
       } else {
         // Desktop animations (your original code)
+
         gsap.utils.toArray<HTMLElement>(".staggered-row").forEach((row, i) => {
           const heading = row.querySelector(".section-heading") as HTMLElement;
           const description = row.querySelector(
@@ -101,7 +121,40 @@ export default function Home() {
               "-=0.6"
             );
         });
+        gsap.from(".image-container", {
+          scale: 0.6,
+          opacity: 0,
+          duration: 1.2,
+          ease: "expo.out",
+          stagger: {
+            amount: 0.8,
+            from: "center",
+          },
+          delay: 0.3,
+        });
+
+        gsap.from("#site-title", {
+          y: 100,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power4.out",
+          delay: 1,
+        });
       }
+      gsap.from(".floating-text-container", {
+        scrollTrigger: {
+          trigger: ".floating-text-container",
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+        scale: 0,
+        opacity: 0,
+        duration: 1.4,
+        ease: "power2.out(1.7)",
+        stagger: {
+          amount: 0.4,
+        },
+      });
 
       // Cleanup function
       return () => {

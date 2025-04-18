@@ -17,8 +17,15 @@ const app = express();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS
-  ? process.env.ALLOWED_ORIGINS.split(',')
+  ? process.env.ALLOWED_ORIGINS
+      .split(',')
+      .map(origin => origin.trim())         // remove stray whitespace
+      .filter(origin => origin.length)      // drop any empty strings
   : [];
+
+// for debugging—log out what you actually got:
+console.log("🔑 ALLOWED_ORIGINS:", allowedOrigins);
+
 // Middleware
 app.use(express.json());
 app.use(cors({
