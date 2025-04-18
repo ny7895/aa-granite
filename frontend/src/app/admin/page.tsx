@@ -31,6 +31,7 @@ interface Inquiry {
   materialsObtained: boolean;
   depositMade: boolean;
   estimatedCompletionDate?: string;
+  createdAt?: string;
 }
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api";
 
@@ -357,6 +358,7 @@ const AdminDashboard = () => {
             <th>Name</th>
             <th>Email</th>
             <th>Phone</th>
+            <th>Date Submitted</th>
             <th>Material</th>
             <th>Edge Profile</th>
             <th>Color</th>
@@ -384,6 +386,11 @@ const AdminDashboard = () => {
               <td>{inquiry.name}</td>
               <td>{inquiry.email}</td>
               <td>{inquiry.phone}</td>
+              <td>
+                {inquiry.createdAt
+                  ? new Date(inquiry.createdAt).toLocaleDateString()
+                  : "N/A"}
+              </td>
               <td>{inquiry.material}</td>
               <td>{inquiry.edgeProfile}</td>
               <td>{inquiry.color || "N/A"}</td>

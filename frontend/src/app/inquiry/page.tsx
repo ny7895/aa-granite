@@ -237,7 +237,11 @@ export default function InquiryForm() {
                 name="material"
                 value={formData.material}
                 onChange={handleChange}
+                required
               >
+                <option value="" disabled hidden>
+                  Select a material
+                </option>
                 <option value="Granite">Granite</option>
                 <option value="Marble">Marble</option>
                 <option value="Quartz">Quartz</option>
@@ -252,7 +256,11 @@ export default function InquiryForm() {
                 name="edgeProfile"
                 value={formData.edgeProfile}
                 onChange={handleChange}
+                required
               >
+                <option value="" disabled hidden>
+                  Select an edge profile
+                </option>
                 <option value="Straight">Straight</option>
                 <option value="Beveled">Beveled</option>
                 <option value="Rounded">Rounded</option>
@@ -311,7 +319,11 @@ export default function InquiryForm() {
                 name="sinkCutout"
                 value={formData.sinkCutout}
                 onChange={handleChange}
+                required
               >
+                <option value="" disabled hidden>
+                  Select an option
+                </option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
