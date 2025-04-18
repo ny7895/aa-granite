@@ -55,22 +55,6 @@ export default function Home() {
           });
         });
         gsap.fromTo(
-          ".floating-text-container",
-          { scale: 0, opacity: 0 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 1.2,
-            ease: "power2.out",
-            stagger: 0.3,
-            scrollTrigger: {
-              trigger: ".floating-text-container",
-              start: "top 90%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-        gsap.fromTo(
           ".image-container",
           { scale: 0.6, opacity: 0 },
           {
@@ -159,21 +143,6 @@ export default function Home() {
           delay: 1,
         });
       }
-      gsap.from(".floating-text-container", {
-        scrollTrigger: {
-          trigger: ".floating-text-container",
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-        scale: 0,
-        opacity: 0,
-        duration: 1.4,
-        ease: "power2.out(1.7)",
-        stagger: {
-          amount: 0.4,
-        },
-      });
-
       // Cleanup function
       return () => {
         ScrollTrigger.clearMatchMedia();
