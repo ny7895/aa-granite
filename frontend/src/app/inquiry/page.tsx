@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import styles from "./inquiry.module.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type ExtendedLocomotiveScroll = {
   scrollTo: (
@@ -23,6 +25,8 @@ type ExtendedLocomotiveScroll = {
 };
 
 export default function InquiryForm() {
+  const pathname = usePathname();
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -152,6 +156,31 @@ export default function InquiryForm() {
   return (
     <div id="inquiry-container" data-scroll-container>
       <div data-scroll-section className={styles.contactLayout}>
+        <header className="navbar">
+          <div className="navbar__brand">
+            <Link href="/">Double A Granite</Link>
+          </div>
+          <nav className="navbar__nav">
+            {[
+              { href: "/", label: "Home" },
+              { href: "/projects", label: "Projects" },
+              { href: "/blog", label: "Blog" },
+              { href: "/inquiry", label: "Quote" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={
+                  pathname === link.href
+                    ? "navbar__link navbar__link--active"
+                    : "navbar__link"
+                }
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </header>
         {/* Left Column - Contact Text */}
         <div className={styles.contactTextContent}>
           <h2 className={styles.contactHeader}>GET IN TOUCH</h2>

@@ -35,11 +35,79 @@
       background-color: #151519;
       color: #A9ABB5;
   }
-  
   /* Remove Locomotive Scroll specific classes */
   /* .c-scrollbar {
       display: none !important;
   } */
+  /* Sticky transparent navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    z-index: 100;
+  }
+  
+  .navbar__brand a {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .navbar__nav {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+  }
+  .navbar__nav a {
+    flex: 0 0 auto; /* prevent flex items from shrinking too small */
+  }
+  
+  .navbar__link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+  
+  .navbar__link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background: #fff;
+    transition: width 0.3s ease;
+  }
+  
+  .navbar__link:hover::after,
+  .navbar__link--active::after {
+    width: 100%;
+  }
+  
+  .navbar__link:hover {
+    color: #ddd;
+  }
+  
+  /* Make room for the navbar so it doesn't cover content */
+  #main > *:not(.navbar) {
+    margin-top: 4rem;
+  }
+  
+  /* Optional: change navbar bg once you scroll past hero */
+  .navbar.scrolled {
+    background: rgba(0, 0, 0, 0.85);
+  }
   
   #site-title {
       font-size: 5rem;
@@ -1064,7 +1132,13 @@
     #site-title {
         font-size: 2.2rem;
     }
-
+    .navbar {
+        padding: 0.5rem 1rem;
+      }
+      .navbar__nav a {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+      }
     #page2 h1 {
         font-size: 2.5rem;
     }

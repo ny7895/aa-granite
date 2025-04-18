@@ -6,8 +6,11 @@ import "./style.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Head from "next/head";
+import { usePathname } from "next/navigation";
 
 export default function Home() {
+  const pathname = usePathname();
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       gsap.registerPlugin(ScrollTrigger);
@@ -63,17 +66,16 @@ export default function Home() {
             duration: 1.2,
             ease: "expo.out",
             stagger: { amount: 0.8, from: "center" },
-            delay: 0.3,
-            clearProps: "transform,opacity", // remove inline styles afterwards,
+            delay: 0.7,
+            clearProps: "transform,opacity",
           }
         );
-
         gsap.from("#site-title", {
           y: 100,
           opacity: 0,
           duration: 1.2,
           ease: "power4.out",
-          delay: 1,
+          delay: 0.5, // slight delay so things don’t all pop at once
         });
       } else {
         // Desktop animations (your original code)
@@ -123,24 +125,26 @@ export default function Home() {
               "-=0.6"
             );
         });
-        gsap.from(".image-container", {
-          scale: 0.6,
-          opacity: 0,
-          duration: 1.2,
-          ease: "expo.out",
-          stagger: {
-            amount: 0.8,
-            from: "center",
-          },
-          delay: 0.3,
-        });
+        gsap.fromTo(
+          ".image-container",
+          { scale: 0.6, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 1.2,
+            ease: "expo.out",
+            stagger: { amount: 0.8, from: "center" },
+            delay: 0.7,
+            clearProps: "transform,opacity",
+          }
+        );
 
         gsap.from("#site-title", {
           y: 100,
           opacity: 0,
           duration: 1.2,
           ease: "power4.out",
-          delay: 1,
+          delay: 0.5, // slight delay so things don’t all pop at once
         });
       }
       // Cleanup function
@@ -184,7 +188,31 @@ export default function Home() {
         <meta property="og:url" content="https://www.doubleagranite.com" />
         <meta property="og:type" content="website" />
       </Head>
-
+      <header className="navbar">
+        <div className="navbar__brand">
+          <Link href="/">Double A Granite</Link>
+        </div>
+        <nav className="navbar__nav">
+          {[
+            { href: "/", label: "Home" },
+            { href: "/projects", label: "Projects" },
+            { href: "/blog", label: "Blog" },
+            { href: "/inquiry", label: "Quote" },
+          ].map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={
+                pathname === link.href
+                  ? "navbar__link navbar__link--active"
+                  : "navbar__link"
+              }
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+      </header>
       {/* Hero Section */}
       <div id="page1">
         <div id="heading">

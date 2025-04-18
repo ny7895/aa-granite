@@ -5,6 +5,7 @@ import Link from "next/link";
 import "./styles.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { usePathname } from "next/navigation";
 
 const projects = [
   {
@@ -40,6 +41,8 @@ const projects = [
 ];
 
 export default function Projects() {
+  const pathname = usePathname();
+
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionsRef = useRef<HTMLDivElement[]>([]);
   const imagesRef = useRef<HTMLDivElement[]>([]);
@@ -233,6 +236,31 @@ export default function Projects() {
 
   return (
     <div id="projects-page">
+      <header className="navbar">
+        <div className="navbar__brand">
+          <Link href="/">Double A Granite</Link>
+        </div>
+        <nav className="navbar__nav">
+          {[
+            { href: "/", label: "Home" },
+            { href: "/projects", label: "Projects" },
+            { href: "/blog", label: "Blog" },
+            { href: "/inquiry", label: "Quote" },
+          ].map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={
+                pathname === link.href
+                  ? "navbar__link navbar__link--active"
+                  : "navbar__link"
+              }
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+      </header>
       <div className="projects-hero">
         <h1>Our Expertise</h1>
         <p>Scroll to discover our craftsmanship</p>
