@@ -2,7 +2,71 @@
   position: relative;
   overflow-x: hidden;
 }
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 100;
+}
 
+.navbar__brand a {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navbar__nav {
+  display: flex;
+  gap: 1.5rem;
+}
+.navbar__nav a {
+  flex: 0 0 auto; /* prevent flex items from shrinking too small */
+}
+
+.navbar__link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.2s;
+}
+
+.navbar__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s ease;
+}
+
+.navbar__link:hover::after,
+.navbar__link--active::after {
+width: 100%;
+}
+
+.navbar__link:hover {
+color: #ddd;
+}
+
+/* Hide toggle on desktop */
+.navbar__toggle {
+display: none;
+}
+
+/* Ensure content isn’t hidden under navbar */
+#main > *:not(.navbar) {
+margin-top: 4rem;
+}
 /* Hero Section */
 .projects-hero {
   height: 100vh;
@@ -218,7 +282,39 @@
   .project-content {
     gap: 2rem;
   }
-  
+  .navbar__toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.75rem;
+    cursor: pointer;
+    margin-left: 1rem;
+  }
+
+  /* Hide nav links by default */
+  .navbar__nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 1.5rem;
+    background: rgba(0,0,0,0.9);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 0.75rem;
+    border-radius: 4px;
+    z-index: 200;
+  }
+
+  /* Show on toggle */
+  .navbar__nav.open {
+    display: flex;
+  }
+
+  .navbar__link {
+    padding: 0.5rem 0;
+  }
   .project-image {
     height: 70vh;
   }
@@ -230,7 +326,39 @@
     padding-top: 10vh;
     padding-bottom: 10vh;
   }
-  
+  .navbar__toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.75rem;
+    cursor: pointer;
+    margin-left: 1rem;
+  }
+
+  /* Hide nav links by default */
+  .navbar__nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 1.5rem;
+    background: rgba(0,0,0,0.9);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 0.75rem;
+    border-radius: 4px;
+    z-index: 200;
+  }
+
+  /* Show on toggle */
+  .navbar__nav.open {
+    display: flex;
+  }
+
+  .navbar__link {
+    padding: 0.5rem 0;
+  }
   .text-content {
     order: 2;
     max-width: 100%;
@@ -263,5 +391,38 @@
 @media (max-width: 480px) {
   .project-image {
     height: 50vh;
+  }
+  .navbar__toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.75rem;
+    cursor: pointer;
+    margin-left: 1rem;
+  }
+
+  /* Hide nav links by default */
+  .navbar__nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 1.5rem;
+    background: rgba(0,0,0,0.9);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 0.75rem;
+    border-radius: 4px;
+    z-index: 200;
+  }
+
+  /* Show on toggle */
+  .navbar__nav.open {
+    display: flex;
+  }
+
+  .navbar__link {
+    padding: 0.5rem 0;
   }
 }
