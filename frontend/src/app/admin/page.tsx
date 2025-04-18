@@ -32,7 +32,7 @@ interface Inquiry {
   depositMade: boolean;
   estimatedCompletionDate?: string;
 }
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api";
 
 const AdminDashboard = () => {
   const router = useRouter();
@@ -43,11 +43,10 @@ const AdminDashboard = () => {
   }, []);
 
   const fetchInquiries = async () => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"; // Default fallback
-    console.log("📡 Fetching inquiries from:", `${apiUrl}/api/inquiry`);
+    console.log("📡 Fetching inquiries from:", `${apiUrl}/inquiry`);
 
     try {
-      const response = await fetch(`${apiUrl}/api/inquiry`);
+      const response = await fetch(`${apiUrl}/inquiry`);
       if (!response.ok) throw new Error("Failed to fetch inquiries");
       const data = await response.json();
       console.log("✅ Inquiries loaded:", data);
@@ -59,7 +58,7 @@ const AdminDashboard = () => {
 
   const updateMaterialCost = async (id: string, cost: number) => {
     try {
-      const response = await fetch(`${apiUrl}/api/inquiry/${id}`, {
+      const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ materialCost: cost }),
@@ -80,7 +79,7 @@ const AdminDashboard = () => {
 
   const updateTotalCost = async (id: string, cost: number) => {
     try {
-      const response = await fetch(`${apiUrl}/api/inquiry/${id}`, {
+      const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ totalCost: cost }),
@@ -101,7 +100,7 @@ const AdminDashboard = () => {
 
   const updateEstimatedCompletion = async (id: string, date: string) => {
     try {
-      const response = await fetch(`${apiUrl}/api/inquiry/${id}`, {
+      const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ estimatedCompletionDate: date }),
@@ -126,7 +125,7 @@ const AdminDashboard = () => {
   const updateInquiry = async (id: string, data: Partial<Inquiry>) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/inquiry/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/inquiry/${id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -155,7 +154,7 @@ const AdminDashboard = () => {
       inquiryToUpdate;
 
     try {
-      const response = await fetch(`${apiUrl}/api/inquiry/${id}`, {
+      const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -186,7 +185,7 @@ const AdminDashboard = () => {
 
   const deleteInquiry = async (id: string) => {
     try {
-      const response = await fetch(`${apiUrl}/api/inquiry/${id}`, {
+      const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "DELETE",
       });
 
@@ -211,10 +210,10 @@ const AdminDashboard = () => {
 
   // ✅ Update Inquiry Status
   const updateStatus = async (id: string, newStatus: string) => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"; // Ensure correct API URL
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api"; // Ensure correct API URL
 
     try {
-      const response = await fetch(`${apiUrl}/api/inquiry/${id}`, {
+      const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
@@ -231,7 +230,7 @@ const AdminDashboard = () => {
 
   const toggleMaterialsObtained = async (id: string, value: boolean) => {
     try {
-      const response = await fetch(`${apiUrl}/api/inquiry/${id}`, {
+      const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ materialsObtained: value }),
@@ -253,7 +252,7 @@ const AdminDashboard = () => {
   };
   const toggleDepositMade = async (id: string, value: boolean) => {
     try {
-      const response = await fetch(`${apiUrl}/api/inquiry/${id}`, {
+      const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ depositMade: value }),
@@ -273,7 +272,7 @@ const AdminDashboard = () => {
   };
   const updateProgressNotes = async (id: string, notes: string) => {
     try {
-      const response = await fetch(`${apiUrl}/api/inquiry/${id}`, {
+      const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ progressNotes: notes }),
@@ -296,7 +295,7 @@ const AdminDashboard = () => {
     status: "Pending" | "Partially Paid" | "Paid"
   ) => {
     try {
-      const response = await fetch(`${apiUrl}/api/inquiry/${id}`, {
+      const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ paymentStatus: status }),
