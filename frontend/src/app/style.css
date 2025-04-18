@@ -877,6 +877,22 @@
         bottom: 15%;
         left: 8%;
     }
+    .navbar {
+        padding: 0.5rem 1rem;
+      }
+    
+      .navbar__nav {
+        flex-wrap: wrap;            /* allow items to flow to a new row */
+        justify-content: space-around;
+        gap: 0.5rem;                /* tighten the spacing */
+      }
+    
+      .navbar__link {
+        flex: 1 1 auto;             /* allow each link to shrink/grow */
+        text-align: center;         /* center text in its “box” */
+        font-size: 0.9rem;          /* slightly smaller text */
+        padding: 0.25rem 0;         /* reduce padding */
+      }
 
     #ig6-container {
         width: 30%;
