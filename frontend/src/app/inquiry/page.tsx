@@ -26,6 +26,7 @@ type ExtendedLocomotiveScroll = {
 
 export default function InquiryForm() {
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -160,7 +161,17 @@ export default function InquiryForm() {
           <div className="navbar__brand">
             <Link href="/">Double A Granite</Link>
           </div>
-          <nav className="navbar__nav">
+
+          {/* Hamburger toggle—hidden on desktop */}
+          <button
+            className="navbar__toggle"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label="Toggle menu"
+          >
+            ☰
+          </button>
+
+          <nav className={`navbar__nav ${menuOpen ? "open" : ""}`}>
             {[
               { href: "/", label: "Home" },
               { href: "/projects", label: "Projects" },
@@ -175,6 +186,7 @@ export default function InquiryForm() {
                     ? "navbar__link navbar__link--active"
                     : "navbar__link"
                 }
+                onClick={() => setMenuOpen(false)}
               >
                 {link.label}
               </Link>

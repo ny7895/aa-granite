@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 
 export default function GraniteVsQuartzMarble() {
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const [current, setCurrent] = useState("intro");
   const sectionRefs = useRef<Record<string, HTMLElement>>({});
@@ -46,7 +47,17 @@ export default function GraniteVsQuartzMarble() {
         <div className="navbar__brand">
           <Link href="/">Double A Granite</Link>
         </div>
-        <nav className="navbar__nav">
+
+        {/* Hamburger toggle—hidden on desktop */}
+        <button
+          className="navbar__toggle"
+          onClick={() => setMenuOpen((o) => !o)}
+          aria-label="Toggle menu"
+        >
+          ☰
+        </button>
+
+        <nav className={`navbar__nav ${menuOpen ? "open" : ""}`}>
           {[
             { href: "/", label: "Home" },
             { href: "/projects", label: "Projects" },
@@ -61,6 +72,7 @@ export default function GraniteVsQuartzMarble() {
                   ? "navbar__link navbar__link--active"
                   : "navbar__link"
               }
+              onClick={() => setMenuOpen(false)}
             >
               {link.label}
             </Link>
