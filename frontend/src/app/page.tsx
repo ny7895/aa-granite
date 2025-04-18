@@ -54,17 +54,19 @@ export default function Home() {
             ease: "power2.out",
           });
         });
-        gsap.from(".image-container", {
-          scale: 0.6,
-          opacity: 0,
-          duration: 1.2,
-          ease: "expo.out",
-          stagger: {
-            amount: 0.8,
-            from: "center",
-          },
-          delay: 0.3,
-        });
+        gsap.fromTo(
+          ".image-container",
+          { scale: 0.6, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 1.2,
+            ease: "expo.out",
+            stagger: { amount: 0.8, from: "center" },
+            delay: 0.3,
+            clearProps: "transform,opacity", // remove inline styles afterwards,
+          }
+        );
 
         gsap.from("#site-title", {
           y: 100,
