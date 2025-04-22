@@ -160,7 +160,7 @@ export default function Home() {
     <div id="main">
       <Head>
         <title>
-          Double A Granite | Custom Granite Countertops in Albuquerque
+          Double A Granite | Custom Stone Countertops in Albuquerque
         </title>
         <meta
           name="description"
@@ -168,7 +168,7 @@ export default function Home() {
         />
         <meta
           name="keywords"
-          content="Granite countertops, Albuquerque New Mexico granite countertop, custom stone fabrication Albuquerque New Mexico, quartz, marble, countertop installation, Double A Granite Albuquerque New Mexico"
+          content="Granite countertops, Albuquerque New Mexico granite countertop, custom stone fabrication Albuquerque New Mexico, quartz, marble, countertop installation, Double A Granite Albuquerque New Mexico, granite countertops albuquerque, quartz countertops albuquerque, marble countertops albuquerque"
         />
         <meta name="author" content="Double A Granite" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
