@@ -7,6 +7,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Head from "next/head";
 import { usePathname } from "next/navigation";
+import SeoScript from "../app/components/SeoScript"; // wherever you placed it
 
 export default function Home() {
   const pathname = usePathname();
@@ -159,6 +160,7 @@ export default function Home() {
   return (
     <div id="main">
       <Head>
+        {/* Primary Meta Tags */}
         <title>
           Double A Granite | Custom Stone Countertops in Albuquerque
         </title>
@@ -166,28 +168,58 @@ export default function Home() {
           name="description"
           content="Double A Granite specializes in custom granite, quartz, and marble countertops for residential and commercial spaces in Albuquerque, NM."
         />
-        <meta
-          name="keywords"
-          content="Granite countertops, Albuquerque New Mexico granite countertop, custom stone fabrication Albuquerque New Mexico, quartz, marble, countertop installation, Double A Granite Albuquerque New Mexico, granite countertops albuquerque, quartz countertops albuquerque, marble countertops albuquerque"
-        />
         <meta name="author" content="Double A Granite" />
+        <meta name="robots" content="index, follow" />
+
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://www.doubleagranite.com" />
+
+        {/* Viewport */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {/* Open Graph for Social Media Sharing */}
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Double A Granite" />
+        <meta property="og:url" content="https://www.doubleagranite.com" />
         <meta
           property="og:title"
-          content="Double A Granite | Custom Granite Countertops in Albuquerque"
+          content="Double A Granite | Custom Stone Countertops in Albuquerque"
         />
         <meta
           property="og:description"
-          content="Elevate your home or business with premium granite, quartz, and marble countertops from Double A Granite Albuquerque New Mexico"
+          content="Elevate your home or business with premium granite, quartz, and marble countertops from Double A Granite in Albuquerque, NM."
         />
         <meta
           property="og:image"
-          content="/https://aa-granite.s3.us-east-1.amazonaws.com/dramatic-slabs.png"
-        />{" "}
-        {/* Replace with your image path */}
-        <meta property="og:url" content="https://www.doubleagranite.com" />
-        <meta property="og:type" content="website" />
+          content="https://aa-granite.s3.us-east-1.amazonaws.com/dramatic-slabs.png"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="en_US" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Double A Granite | Custom Stone Countertops in Albuquerque"
+        />
+        <meta
+          name="twitter:description"
+          content="Elevate your home or business with premium granite, quartz, and marble countertops from Double A Granite in Albuquerque, NM."
+        />
+        <meta
+          name="twitter:image"
+          content="https://aa-granite.s3.us-east-1.amazonaws.com/dramatic-slabs.png"
+        />
+
+        {/* Optional: Keywords (mostly for legacy/analytics tools) */}
+        <meta
+          name="keywords"
+          content="granite countertops Albuquerque, quartz countertops Albuquerque, marble countertops Albuquerque, countertop fabrication, countertop installation"
+        />
+
+        {/* Structured Data */}
+        <SeoScript />
       </Head>
       <header className="navbar">
         <div className="navbar__brand">

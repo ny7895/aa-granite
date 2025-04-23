@@ -204,8 +204,11 @@ const AdminDashboard = () => {
   };
 
   // ✅ Handle Logout
-  const handleLogout = () => {
-    localStorage.removeItem("token");
+  const handleLogout = async () => {
+    await fetch(`${apiUrl}/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
     router.replace("/login");
   };
 

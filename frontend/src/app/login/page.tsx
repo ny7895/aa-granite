@@ -17,51 +17,46 @@ export default function LoginPage() {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
-    if (typeof window === "undefined") return; // Prevents SSR issues
-
-    const token = localStorage.getItem("token");
-
-    if (token) {
+    console.log("API URL is:", process.env.NEXT_PUBLIC_API_URL);
+    async function checkAuth() {
       try {
-        const decoded: DecodedToken = jwtDecode(token); // Use the interface
-        console.log("✅ Token found:", decoded);
-
-        const currentTime = Math.floor(Date.now() / 1000);
-        if (decoded.exp > currentTime && decoded.role === "admin") {
-          console.log("✅ Redirecting to /admin...");
+        const res = await fetch(`${apiUrl}/auth/me`, {
+          method: "GET",
+          credentials: "include", // send cookies
+        });
+        if (res.ok) {
           router.replace("/admin");
-        } else {
-          console.log("❌ Expired or invalid token. Logging out.");
-          localStorage.removeItem("token");
         }
-      } catch (err) {
-        console.error("❌ Invalid token:", err);
-        localStorage.removeItem("token");
+      } catch {
+        // not logged in, ignore
       }
     }
-  }, [router]);
+    checkAuth();
+  }, [apiUrl, router]);
 
+  // 2️⃣ Handle login form submission
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
 
-    const response = await fetch(`${apiUrl}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch(`${apiUrl}/auth/login`, {
+        method: "POST",
+        credentials: "include", // important!
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const data = await response.json();
-    if (response.ok) {
-      console.log("✅ Login successful. Token received:", data.token);
-      localStorage.setItem("token", data.token);
-      console.log(
-        "🔍 Stored Token in localStorage:",
-        localStorage.getItem("token")
-      );
-      router.replace("/admin");
-    } else {
-      setError(data.error);
-      console.log("❌ Login failed:", data.error);
+      if (res.ok) {
+        // Server set the cookie — just redirect to admin
+        router.replace("/admin");
+      } else {
+        const body = await res.json();
+        setError(body.error || "Login failed");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("An unexpected error occurred");
     }
   };
 
