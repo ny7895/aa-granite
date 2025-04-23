@@ -40,12 +40,15 @@ app.use(cors({
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    const conn = mongoose.connection;
+    console.log(
+      `✅ Connected to MongoDB at ${conn.host}, database: ${conn.name} (NODE_ENV=${process.env.NODE_ENV})`
+    );
   })
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
+
 
 // Create email transporter
 const transporter = nodemailer.createTransport({
