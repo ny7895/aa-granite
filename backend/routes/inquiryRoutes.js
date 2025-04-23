@@ -110,4 +110,17 @@ router.put('/update/:id', async (req, res) => {
     res.status(400).json({ message: 'Error updating inquiry', error: err.message });
   }
 });
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const inquiry = await Inquiry.findByIdAndDelete(id);
+    if (!inquiry) return res.status(404).json({ error: "Inquiry not found" });
+
+    console.log(`✅ Inquiry deleted: ${id}`);
+    res.json({ message: "Inquiry deleted successfully" });
+  } catch (err) {
+    console.error("❌ Error deleting inquiry:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
 export default router;
