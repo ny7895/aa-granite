@@ -1,7 +1,7 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { jwtDecode } from "jwt-decode";
 import styles from "./admin.module.css"; // ✅ Import styles
 
 interface Inquiry {
@@ -33,6 +33,7 @@ interface Inquiry {
   estimatedCompletionDate?: string;
   createdAt?: string;
 }
+
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api";
 
 const AdminDashboard = () => {
@@ -40,14 +41,25 @@ const AdminDashboard = () => {
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
 
   useEffect(() => {
-    fetchInquiries();
-  }, []);
+    // ➊ Protect route: check auth first
+    fetch(`${apiUrl}/auth/me`, {
+      method: "GET",
+      credentials: "include",
+    }).then((res) => {
+      if (res.ok) {
+        fetchInquiries();
+      } else {
+        router.replace("/login");
+      }
+    });
+  }, [router]);
 
   const fetchInquiries = async () => {
     console.log("📡 Fetching inquiries from:", `${apiUrl}/inquiry`);
-
     try {
-      const response = await fetch(`${apiUrl}/inquiry`);
+      const response = await fetch(`${apiUrl}/inquiry`, {
+        credentials: "include",
+      });
       if (!response.ok) throw new Error("Failed to fetch inquiries");
       const data = await response.json();
       console.log("✅ Inquiries loaded:", data);
@@ -61,13 +73,11 @@ const AdminDashboard = () => {
     try {
       const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ materialCost: cost }),
       });
-
       if (!response.ok) throw new Error("Failed to update material cost");
-
-      // ✅ Update UI after successful update
       setInquiries((prev) =>
         prev.map((inquiry) =>
           inquiry._id === id ? { ...inquiry, materialCost: cost } : inquiry
@@ -82,13 +92,11 @@ const AdminDashboard = () => {
     try {
       const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ totalCost: cost }),
       });
-
       if (!response.ok) throw new Error("Failed to update total cost");
-
-      // ✅ Update UI after successful update
       setInquiries((prev) =>
         prev.map((inquiry) =>
           inquiry._id === id ? { ...inquiry, totalCost: cost } : inquiry
@@ -103,14 +111,12 @@ const AdminDashboard = () => {
     try {
       const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ estimatedCompletionDate: date }),
       });
-
       if (!response.ok)
         throw new Error("Failed to update estimated completion");
-
-      // ✅ Update UI after successful update
       setInquiries((prev) =>
         prev.map((inquiry) =>
           inquiry._id === id
@@ -125,85 +131,50 @@ const AdminDashboard = () => {
 
   const updateInquiry = async (id: string, data: Partial<Inquiry>) => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/inquiry/${id}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-        }
-      );
-
+      const response = await fetch(`${apiUrl}/inquiry/${id}`, {
+        method: "PUT",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
       if (!response.ok) throw new Error("Failed to update inquiry");
-
       console.log("✅ Inquiry updated successfully!");
-      fetchInquiries(); // Refresh UI
+      fetchInquiries();
     } catch (error) {
       console.error("❌ Error updating inquiry:", error);
     }
   };
 
   const handleUpdate = async (id: string) => {
-    const inquiryToUpdate = inquiries.find((inquiry) => inquiry._id === id);
-
+    const inquiryToUpdate = inquiries.find((inqu) => inqu._id === id);
     if (!inquiryToUpdate) {
       console.error("Inquiry not found");
       return;
     }
-
     const { materialCost, totalCost, estimatedCompletionDate } =
       inquiryToUpdate;
-
-    try {
-      const response = await fetch(`${apiUrl}/inquiry/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          materialCost,
-          totalCost,
-          estimatedCompletionDate,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update inquiry");
-      }
-
-      // Update UI after successful update
-      setInquiries((prev) =>
-        prev.map((inquiry) =>
-          inquiry._id === id
-            ? { ...inquiry, materialCost, totalCost, estimatedCompletionDate }
-            : inquiry
-        )
-      );
-
-      alert("Inquiry updated successfully!");
-    } catch (error) {
-      console.error("Error updating inquiry:", error);
-    }
+    await updateInquiry(id, {
+      materialCost,
+      totalCost,
+      estimatedCompletionDate,
+    });
+    alert("Inquiry updated successfully!");
   };
 
   const deleteInquiry = async (id: string) => {
     try {
       const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "DELETE",
+        credentials: "include",
       });
-
-      if (!response.ok) {
-        throw new Error("❌ Failed to delete inquiry");
-      }
-
-      // ✅ Remove the deleted inquiry from the UI
+      if (!response.ok) throw new Error("❌ Failed to delete inquiry");
       setInquiries((prev) => prev.filter((inquiry) => inquiry._id !== id));
-
       console.log(`✅ Successfully deleted inquiry with ID: ${id}`);
     } catch (error) {
       console.error("❌ Error deleting inquiry:", error);
     }
   };
 
-  // ✅ Handle Logout
   const handleLogout = async () => {
     await fetch(`${apiUrl}/auth/logout`, {
       method: "POST",
@@ -212,21 +183,17 @@ const AdminDashboard = () => {
     router.replace("/login");
   };
 
-  // ✅ Update Inquiry Status
   const updateStatus = async (id: string, newStatus: string) => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api"; // Ensure correct API URL
-
     try {
       const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
       });
-
       if (!response.ok) throw new Error("Failed to update status");
-
       console.log("✅ Status updated successfully!");
-      fetchInquiries(); // Refresh the inquiry list
+      fetchInquiries();
     } catch (error) {
       console.error("❌ Error updating status:", error);
     }
@@ -236,64 +203,59 @@ const AdminDashboard = () => {
     try {
       const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ materialsObtained: value }),
       });
-
       if (!response.ok) throw new Error("Failed to update materialsObtained");
-
-      // ✅ Update UI after successful update
       setInquiries((prev) =>
-        prev.map((inquiry) =>
-          inquiry._id === id
-            ? { ...inquiry, materialsObtained: value }
-            : inquiry
+        prev.map((inq) =>
+          inq._id === id ? { ...inq, materialsObtained: value } : inq
         )
       );
     } catch (error) {
       console.error("❌ Error updating materialsObtained:", error);
     }
   };
+
   const toggleDepositMade = async (id: string, value: boolean) => {
     try {
       const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ depositMade: value }),
       });
-
       if (!response.ok) throw new Error("Failed to update depositMade");
-
-      // ✅ Update UI after successful update
       setInquiries((prev) =>
-        prev.map((inquiry) =>
-          inquiry._id === id ? { ...inquiry, depositMade: value } : inquiry
+        prev.map((inq) =>
+          inq._id === id ? { ...inq, depositMade: value } : inq
         )
       );
     } catch (error) {
       console.error("❌ Error updating depositMade:", error);
     }
   };
+
   const updateProgressNotes = async (id: string, notes: string) => {
     try {
       const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ progressNotes: notes }),
       });
-
       if (!response.ok) throw new Error("Failed to update progress notes");
-
-      // ✅ Update UI after successful update
       setInquiries((prev) =>
-        prev.map((inquiry) =>
-          inquiry._id === id ? { ...inquiry, progressNotes: notes } : inquiry
+        prev.map((inq) =>
+          inq._id === id ? { ...inq, progressNotes: notes } : inq
         )
       );
     } catch (error) {
       console.error("❌ Error updating progress notes:", error);
     }
   };
+
   const updatePaymentStatus = async (
     id: string,
     status: "Pending" | "Partially Paid" | "Paid"
@@ -301,50 +263,38 @@ const AdminDashboard = () => {
     try {
       const response = await fetch(`${apiUrl}/inquiry/${id}`, {
         method: "PUT",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ paymentStatus: status }),
       });
-
-      if (!response.ok) {
-        throw new Error("❌ Failed to update payment status");
-      }
-
-      // ✅ Update UI after successful API update
+      if (!response.ok) throw new Error("❌ Failed to update payment status");
       setInquiries((prev) =>
-        prev.map((inquiry) =>
-          inquiry._id === id ? { ...inquiry, paymentStatus: status } : inquiry
+        prev.map((inq) =>
+          inq._id === id ? { ...inq, paymentStatus: status } : inq
         )
       );
-
       console.log(`✅ Payment status updated to ${status} for inquiry ${id}`);
     } catch (error) {
       console.error("❌ Error updating payment status:", error);
     }
   };
 
-  // ✅ Export to CSV
   const exportCSV = () => {
     let csv =
       "Name,Email,Phone,Material,Address,Installation Date,Message,Status\n";
-    inquiries.forEach((inquiry) => {
-      csv += `${inquiry.name},${inquiry.email},${inquiry.phone},${
-        inquiry.material
-      },${inquiry.address},${inquiry.installationDate || "N/A"},$,${
-        inquiry.status
-      }\n`;
+    inquiries.forEach((i) => {
+      csv += `${i.name},${i.email},${i.phone},${i.material},${i.address},${
+        i.installationDate || "N/A"
+      },,${i.status}\n`;
     });
-
     const blob = new Blob([csv], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
     link.download = "inquiries.csv";
-    document.body.appendChild(link);
     link.click();
-    document.body.removeChild(link);
   };
 
-  // ✅ Generate Invoice (Placeholder for now)
   const generateInvoice = (inquiry: Inquiry) => {
     alert(`Generating invoice for ${inquiry.name}...`);
   };

@@ -1,62 +1,43 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { jwtDecode } from "jwt-decode";
 import styles from "../login/LoginPage.module.css";
-
-interface DecodedToken {
-  exp: number;
-  role?: string;
-}
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL || "/api";
 
+  // ➊ If already authenticated, redirect to /admin
   useEffect(() => {
-    console.log("API URL is:", process.env.NEXT_PUBLIC_API_URL);
-    async function checkAuth() {
-      try {
-        const res = await fetch(`${apiUrl}/auth/me`, {
-          method: "GET",
-          credentials: "include", // send cookies
-        });
-        if (res.ok) {
-          router.replace("/admin");
-        }
-      } catch {
-        // not logged in, ignore
-      }
-    }
-    checkAuth();
+    fetch(`${apiUrl}/auth/me`, {
+      method: "GET",
+      credentials: "include",
+    }).then((res) => {
+      if (res.ok) router.replace("/admin");
+    });
   }, [apiUrl, router]);
 
-  // 2️⃣ Handle login form submission
+  // ➋ Handle login
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
-    try {
-      const res = await fetch(`${apiUrl}/auth/login`, {
-        method: "POST",
-        credentials: "include", // important!
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+    const res = await fetch(`${apiUrl}/auth/login`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
 
-      if (res.ok) {
-        // Server set the cookie — just redirect to admin
-        router.replace("/admin");
-      } else {
-        const body = await res.json();
-        setError(body.error || "Login failed");
-      }
-    } catch (err) {
-      console.error("Login error:", err);
-      setError("An unexpected error occurred");
+    if (res.ok) {
+      router.replace("/admin");
+    } else {
+      const body = await res.json();
+      setError(body.error || "Login failed");
     }
   };
 
