@@ -204,6 +204,8 @@ export default function InquiryForm() {
           <div className={styles.contactDetails}>
             <p>Available for consultations</p>
             <p>DoubleAGraniteABQ@gmail.com</p>
+            <p>english: 505-267-9060</p>
+            <p>espanol: 505-818-2430</p>
             <p>se habla español</p>
           </div>
         </div>
@@ -212,7 +214,8 @@ export default function InquiryForm() {
         <div className={styles.inquiryFormContainer}>
           <h1 className={styles.inquiryTitle}>Request a Quote</h1>
           <p className={styles.inquirySubtitle}>
-            Fill out the form below to get started on your project.
+            Fill out the form below to get started on your project. Not all
+            fields are required but it does help.
           </p>
 
           {message && <p className={styles.inquiryMessage}>{message}</p>}
@@ -278,7 +281,6 @@ export default function InquiryForm() {
                 name="material"
                 value={formData.material}
                 onChange={handleChange}
-                required
               >
                 <option value="" disabled hidden>
                   Select a material
@@ -297,7 +299,6 @@ export default function InquiryForm() {
                 name="edgeProfile"
                 value={formData.edgeProfile}
                 onChange={handleChange}
-                required
               >
                 <option value="" disabled hidden>
                   Select an edge profile
@@ -360,7 +361,6 @@ export default function InquiryForm() {
                 name="sinkCutout"
                 value={formData.sinkCutout}
                 onChange={handleChange}
-                required
               >
                 <option value="" disabled hidden>
                   Select an option
